@@ -34,10 +34,15 @@ Build a basic AI pipeline capable of performing inference on-device using lightw
 - OpenCV (Image Processing)
 - Google Colab (Training Environment)
 
-### Project Structure  
-aesthetic-intelligence-engine/
-├── notebooks/    # Training notebook
-├── models/       # Saved .h5 and .tflite models
-├── reports/      # Performance comparison report
-├── inference/    # Inference scripts
-└── data/         # Dataset (stored on Google Drive)
+### Project Structure
+
+    aesthetic-intelligence-engine/
+    ├── notebooks/    # Training notebook
+    ├── models/       # Saved .h5 and .tflite models
+    ├── reports/      # Performance comparison report
+    ├── inference/    # Inference scripts
+    └── data/         # Dataset (stored on Google Drive)
+
+### Note
+Full dataset training (12k images) recommended for production.
+2000 image subset used due to Colab free tier RAM constraints.
