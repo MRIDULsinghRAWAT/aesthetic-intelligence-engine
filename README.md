@@ -56,6 +56,9 @@ Weight pruning via `tensorflow-model-optimization` was attempted but is currentl
 ### Demo
 On-device inference was demonstrated on 6 real validation images, correctly classifying aesthetically pleasing images (sunflowers, drinks, skyline) as "Good" and a blurred/dark image as "Bad". See `reports/demo_predictions.png` and demo video.
 
+### Demo Video
+[Watch Phase 2 On-Device Inference Demo](reports/phase2_demo_inference.mp4)
+
 ---
 
 ## Dataset
