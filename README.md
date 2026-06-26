@@ -59,9 +59,15 @@ On-device inference was demonstrated on 6 real validation images, correctly clas
 ### Demo Video
 [Watch Phase 2 On-Device Inference Demo](reports/phase2_demo_inference.mp4)
 
-## Extended Phase 2 Benchmarks
-Memory usage, energy efficiency, real-time FPS, and edge application details: 
-[phase2_extended_benchmark.md](reports/phase2_extended_benchmark.md)
+### Extended Phase 2 Benchmarks
+Detailed memory usage, energy efficiency, real-time FPS, and edge application 
+integration results: [phase2_extended_benchmark.md](reports/phase2_extended_benchmark.md)
+
+A lightweight Flask-based inference API (`inference/app.py`) was also built to 
+demonstrate edge application integration, exposing a `/predict` endpoint for 
+image-based aesthetic scoring.
+
+
 
 ---
 
