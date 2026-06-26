@@ -59,6 +59,10 @@ On-device inference was demonstrated on 6 real validation images, correctly clas
 ### Demo Video
 [Watch Phase 2 On-Device Inference Demo](reports/phase2_demo_inference.mp4)
 
+## Extended Phase 2 Benchmarks
+Memory usage, energy efficiency, real-time FPS, and edge application details: 
+[phase2_extended_benchmark.md](reports/phase2_extended_benchmark.md)
+
 ---
 
 ## Dataset
