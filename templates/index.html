@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="On-Device Edge AI for Aesthetic Scoring & Classification powered by TensorFlow Lite">
+    <title>Aesthetic Intelligence Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-outer: #eae8e2;
+            --bg-inner: #ffffff;
+            --text-primary: #0a0a0a;
+            --text-muted: #52525b;
+            --text-caption: #71717a;
+            --accent-black: #000000;
+            --accent-grey: #4a4a4d;
+            --good-color: #047857;
+            --good-bg: #ecfdf5;
+            --good-border: #a7f3d0;
+            --bad-color: #b91c1c;
+            --bad-bg: #fef2f2;
+            --bad-border: #fecaca;
+            --sans: 'Suisse Int\'l', 'Suisse BP Int\'l', 'Switzer', 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            font-family: var(--sans);
+            background-color: var(--bg-outer);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 120px 24px 60px;
+        }
+
+        .outer-nav-left {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            z-index: 100;
+            max-width: 210px;
+            background: #ffffff;
+            color: var(--text-muted);
+            border-radius: 6px;
+            padding: 18px 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: 0.72rem;
+            line-height: 1.55;
+            letter-spacing: 0.02em;
+        }
+
+        .outer-nav-left strong {
+            display: block;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .outer-nav-right {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--accent-black);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-transform: uppercase;
+        }
+
+        .outer-nav-right img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+
+        .outer-nav-center {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            width: 340px;
+            height: 46px;
+            background: var(--accent-grey);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .nav-logo {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: -0.04em;
+        }
+
+        .nav-menu-btn {
+            color: #ffffff;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        /* ============ INNER DEVICE CANVAS ============ */
+        .main-canvas {
+            width: 100%;
+            max-width: 1120px;
+            background: var(--bg-inner);
+            border-radius: 16px;
+            padding: 60px 48px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 48px;
+            align-items: start;
+            animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: relative;
+        }
+
+        @keyframes revealUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============ LEFT COLUMN ============ */
+        .left-col {
+            width: 100%;
+        }
+
+        /* Upload Area */
+        .upload-zone {
+            position: relative;
+            border: 1.5px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 54px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: #f8fafc;
+            overflow: hidden;
+        }
+
+        .upload-zone:hover,
+        .upload-zone.dragover {
+            border-color: var(--accent-black);
+            background: #f1f5f9;
+        }
+
+        .upload-zone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-icon {
+            font-size: 1.8rem;
+            margin-bottom: 14px;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .upload-zone:hover .upload-icon {
+            transform: translateY(-4px);
+        }
+
+        .upload-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .upload-hint {
+            font-size: 0.75rem;
+            color: var(--text-caption);
+        }
+
+        /* Preview Box */
+        .preview-wrapper {
+            display: none;
+            margin-top: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background: #fafafa;
+            max-height: 280px;
+        }
+
+        .preview-wrapper img {
+            width: 100%;
+            height: auto;
+            max-height: 280px;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* ============ RIGHT COLUMN ============ */
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            padding-top: 8px;
+        }
+
+        .hero-title {
+            font-family: var(--sans);
+            font-size: clamp(2rem, 4.5vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 32px;
+            letter-spacing: 0.01em;
+        }
+
+        /* Button */
+        .btn-analyze {
+            display: none;
+            width: 100%;
+            padding: 14px 28px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: var(--accent-black);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.25s ease;
+        }
+
+        .btn-analyze:hover {
+            opacity: 0.85;
+        }
+
+        .btn-enhance {
+            display: none;
+            width: 100%;
+            padding: 14px 28px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: #059669; /* Elegant Emerald Green */
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.25s ease;
+            margin-top: 12px;
+        }
+
+        .btn-enhance:hover {
+            opacity: 0.85;
+        }
+
+        .btn-outline {
+            width: 100%;
+            padding: 14px 28px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-black);
+            background: #ffffff;
+            border: 1px solid var(--accent-black);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-black);
+            color: #ffffff;
+        }
+
+        /* Loader */
+        .loader {
+            display: none;
+            margin: 20px auto 0;
+            width: 28px;
+            height: 28px;
+            border: 2.5px solid #f1f5f9;
+            border-top-color: var(--accent-black);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Result Panel */
+        .result-panel {
+            display: none;
+            margin-top: 24px;
+            animation: revealUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 12px;
+        }
+
+        .result-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .result-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 4px;
+        }
+
+        .result-panel.good .result-badge {
+            background: var(--good-bg);
+            color: var(--good-color);
+            border: 1px solid var(--good-border);
+        }
+
+        .result-panel.bad .result-badge {
+            background: var(--bad-bg);
+            color: var(--bad-color);
+            border: 1px solid var(--bad-border);
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .metric-cell {
+            padding: 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+
+        .metric-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-caption);
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .result-panel.good .metric-value.score-v {
+            color: var(--good-color);
+        }
+
+        .result-panel.bad .metric-value.score-v {
+            color: var(--bad-color);
+        }
+
+        .metric-unit {
+            font-size: 0.75rem;
+            color: var(--text-caption);
+            margin-left: 2px;
+            font-weight: 400;
+        }
+
+        .score-track {
+            width: 100%;
+            height: 3px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 999px;
+            transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .result-panel.good .score-fill {
+            background: var(--good-color);
+        }
+
+        .result-panel.bad .score-fill {
+            background: var(--bad-color);
+        }
+
+        /* ============ FOOTER ============ */
+        .page-footer {
+            margin-top: 36px;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-caption);
+            text-align: center;
+        }
+
+        .page-footer span {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1400px) {
+            .outer-nav-left {
+                position: relative;
+                top: 0;
+                left: 0;
+                max-width: 100%;
+                margin-bottom: 24px;
+            }
+
+            .outer-nav-center {
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                width: 100%;
+                margin-bottom: 24px;
+            }
+
+            .outer-nav-right {
+                position: relative;
+                top: 0;
+                right: 0;
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 24px;
+            }
+
+            body {
+                padding-top: 40px;
+            }
+
+            .main-canvas {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .main-canvas {
+                grid-template-columns: 1fr;
+                gap: 36px;
+                padding: 40px 24px;
+            }
+        }
+
+        /* ============ CONTACT MODAL ============ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 16, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .contact-modal {
+            background: #ffffff;
+            width: 90%;
+            max-width: 440px;
+            border-radius: 16px;
+            padding: 36px 32px 32px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transform: scale(0.9);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .modal-overlay.active .contact-modal {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-caption);
+            transition: color 0.2s ease;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-black);
+        }
+
+        .modal-portrait {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 4px solid #f1f5f9;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            display: block;
+        }
+
+        .modal-name {
+            font-family: var(--sans);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .modal-role {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-caption);
+            margin-bottom: 28px;
+        }
+
+        .modal-info-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+            margin-bottom: 8px;
+        }
+
+        .modal-info-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .modal-info-item:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .modal-info-icon {
+            font-size: 1.2rem;
+            margin-right: 14px;
+        }
+
+        .modal-info-text {
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Outer Navigation Header Info Box -->
+    <div class="outer-nav-left">
+        <strong>Aesthetic Engine</strong>
+        On-device Edge AI pipeline that evaluates image aesthetics in real time. Powered by a dynamically quantized
+        TFLite model running locally to guarantee instant scoring, zero network overhead, and absolute privacy.
+    </div>
+
+    <div class="outer-nav-center">
+        <span class="nav-logo">Æ.</span>
+        <span class="nav-menu-btn">☰</span>
+    </div>
+
+    <div class="outer-nav-right" onclick="openModal()" style="cursor: pointer;">
+        <img src="mridul_avatar.jpg" alt="Mridul Singh Rawat Profile Picture">
+        <span>Get in Touch</span>
+    </div>
+
+    <!-- Inner Mockup Screen Frame -->
+    <main class="main-canvas">
+
+        <!-- LEFT COLUMN: Upload & Preview -->
+        <div class="left-col">
+            <div class="upload-zone" id="uploadZone" onclick="if(!stream && event.target.id !== 'webcam') document.getElementById('imageInput').click();" style="cursor: pointer; position: relative; transition: padding 0.3s ease;">
+                <div id="uploadZoneContent">
+                    <span class="upload-icon">↑</span>
+                    <p class="upload-label">Drop your image here</p>
+                    <p class="upload-hint">or click to browse &middot; JPG, PNG, WEBP</p>
+                </div>
+                <video id="webcam" autoplay playsinline style="display: none; width: 100%; height: 280px; object-fit: cover; border-radius: 8px;"></video>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+            </div>
+            <button class="btn-outline" id="cameraBtn" style="margin-top: 12px;" onclick="event.stopPropagation(); handleCameraClick();">Use Web Camera</button>
+            <div class="preview-wrapper" id="previewWrapper">
+                <img id="preview" alt="Uploaded image preview">
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Control & Results -->
+        <div class="right-col">
+            <h1 class="hero-title">Aesthetic Intelligence</h1>
+            <p class="hero-subtitle">
+                Upload an image and let the AI model running on your device
+                score its aesthetic quality in real time.
+            </p>
+
+            <button class="btn-analyze" id="analyzeBtn" onclick="predict()">Analyze Aesthetic</button>
+            <button class="btn-enhance" id="enhanceBtn" onclick="enhanceImage()">Auto-Enhance Image</button>
+            <div class="loader" id="loader"></div>
+
+            <div class="result-panel" id="resultPanel">
+                <div class="result-header">
+                    <h2 class="result-title">Analysis</h2>
+                    <span class="result-badge" id="badge">Good Aesthetic</span>
+                </div>
+                <div class="metrics-row">
+                    <div class="metric-cell">
+                        <div class="metric-label">Score</div>
+                        <div class="metric-value score-v" id="scoreVal">0.00</div>
+                        <div class="score-track">
+                            <div class="score-fill" id="scoreFill"></div>
+                        </div>
+                    </div>
+                    <div class="metric-cell">
+                        <div class="metric-label">Latency</div>
+                        <div class="metric-value score-v latency-v" id="latencyVal">0.0<span
+                                class="metric-unit">ms</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="right-col-hint" id="rightHint"
+                style="text-align:center; color: var(--text-caption); font-size: 0.75rem; letter-spacing: 0.08em; margin-top: 24px;">
+                Upload an image to begin evaluation
+            </p>
+
+            <footer class="page-footer">
+                On-device Model: <span>model_dynamic_quant.tflite</span>
+            </footer>
+        </div>
+
+    </main>
+
+    <!-- Contact Modal -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="contact-modal">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <img src="mridul.jpg" alt="Mridul Singh Rawat" class="modal-portrait">
+            <h2 class="modal-name">Mridul Singh Rawat</h2>
+            <div class="modal-info-group">
+                <a href="mailto:mridulsinghrawat31@gmail.com" class="modal-info-item">
+                    <span class="modal-info-icon">✉</span>
+                    <span class="modal-info-text">mridulsinghrawat31@gmail.com</span>
+                </a>
+                <a href="https://github.com/MRIDULsinghRAWAT" target="_blank" rel="noopener noreferrer"
+                    class="modal-info-item">
+                    <span class="modal-info-icon">🐙</span>
+                    <span class="modal-info-text">github.com/MRIDULsinghRAWAT</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const uploadZone = document.getElementById('uploadZone');
+        const imageInput = document.getElementById('imageInput');
+        const previewWrapper = document.getElementById('previewWrapper');
+        const preview = document.getElementById('preview');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const enhanceBtn = document.getElementById('enhanceBtn');
+        const loader = document.getElementById('loader');
+        const resultPanel = document.getElementById('resultPanel');
+        const rightHint = document.getElementById('rightHint');
+        const webcam = document.getElementById('webcam');
+        const uploadZoneContent = document.getElementById('uploadZoneContent');
+        const cameraBtn = document.getElementById('cameraBtn');
+
+        let capturedBlob = null;
+        let stream = null;
+
+        // Drag & Drop event bindings
+        ['dragenter', 'dragover'].forEach(ev => {
+            uploadZone.addEventListener(ev, e => { e.preventDefault(); uploadZone.classList.add('dragover'); }, false);
+        });
+        ['dragleave', 'drop'].forEach(ev => {
+            uploadZone.addEventListener(ev, e => { e.preventDefault(); uploadZone.classList.remove('dragover'); }, false);
+        });
+        uploadZone.addEventListener('drop', e => {
+            if (e.dataTransfer.files.length) {
+                imageInput.files = e.dataTransfer.files;
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+        imageInput.addEventListener('change', function () {
+            if (this.files.length) handleFile(this.files[0]);
+        });
+
+        async function toggleCamera() {
+            if (stream) {
+                stopCamera();
+            } else {
+                try {
+                    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+                    webcam.srcObject = stream;
+                    webcam.style.display = 'block';
+                    uploadZoneContent.style.display = 'none';
+                    uploadZone.style.padding = '0';
+                    cameraBtn.textContent = 'Capture Photo';
+                    enhanceBtn.style.display = 'none';
+                    analyzeBtn.style.display = 'none';
+                    previewWrapper.style.display = 'none';
+                } catch (err) {
+                    alert('Camera access denied or unavailable: ' + err.message);
+                }
+            }
+        }
+
+        function stopCamera() {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                stream = null;
+            }
+            webcam.style.display = 'none';
+            uploadZoneContent.style.display = 'block';
+            uploadZone.style.padding = '54px 24px';
+            cameraBtn.textContent = 'Use Web Camera';
+        }
+
+        function capturePhoto() {
+            if (!stream) return;
+            const canvas = document.createElement('canvas');
+            canvas.width = webcam.videoWidth || 640;
+            canvas.height = webcam.videoHeight || 480;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(webcam, 0, 0, canvas.width, canvas.height);
+            
+            canvas.toBlob(blob => {
+                capturedBlob = blob;
+                preview.src = URL.createObjectURL(blob);
+                previewWrapper.style.display = 'block';
+                analyzeBtn.style.display = 'block';
+                enhanceBtn.style.display = 'none';
+                resultPanel.style.display = 'none';
+                rightHint.style.display = 'none';
+                stopCamera();
+            }, 'image/jpeg');
+        }
+
+        function handleCameraClick() {
+            if (stream) {
+                capturePhoto();
+            } else {
+                toggleCamera();
+            }
+        }
+
+        function getActiveFile() {
+            if (capturedBlob) return capturedBlob;
+            if (imageInput.files.length) return imageInput.files[0];
+            return null;
+        }
+
+        function handleFile(file) {
+            capturedBlob = null;
+            preview.src = URL.createObjectURL(file);
+            previewWrapper.style.display = 'block';
+            analyzeBtn.style.display = 'block';
+            enhanceBtn.style.display = 'none';
+            resultPanel.style.display = 'none';
+            rightHint.style.display = 'none';
+            document.getElementById('scoreFill').style.width = '0%';
+        }
+
+        async function predict() {
+            const file = getActiveFile();
+            if (!file) { alert('Please select or capture an image first.'); return; }
+
+            analyzeBtn.style.display = 'none';
+            enhanceBtn.style.display = 'none';
+            resultPanel.style.display = 'none';
+            rightHint.style.display = 'none';
+            loader.style.display = 'block';
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const res = await fetch('/predict', { method: 'POST', body: formData });
+                if (!res.ok) throw new Error('Prediction failed');
+                const data = await res.json();
+
+                loader.style.display = 'none';
+                resultPanel.style.display = 'block';
+                resultPanel.className = 'result-panel ' + (data.score > 0.5 ? 'good' : 'bad');
+
+                document.getElementById('badge').textContent = data.label;
+                document.getElementById('scoreVal').textContent = data.score.toFixed(3);
+                document.getElementById('latencyVal').innerHTML = data.latency_ms.toFixed(1) + '<span class="metric-unit">ms</span>';
+
+                const pct = Math.min(Math.max(data.score * 100, 0), 100);
+                setTimeout(() => { document.getElementById('scoreFill').style.width = pct + '%'; }, 60);
+
+                analyzeBtn.style.display = 'block';
+                enhanceBtn.style.display = 'block';
+            } catch (err) {
+                loader.style.display = 'none';
+                analyzeBtn.style.display = 'block';
+                enhanceBtn.style.display = 'none';
+                alert('Error: ' + err.message);
+            }
+        }
+
+        async function enhanceImage() {
+            const file = getActiveFile();
+            if (!file) { alert('Please select or capture an image first.'); return; }
+
+            enhanceBtn.style.display = 'none';
+            analyzeBtn.style.display = 'none';
+            resultPanel.style.display = 'none';
+            loader.style.display = 'block';
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const res = await fetch('/enhance', { method: 'POST', body: formData });
+                if (!res.ok) throw new Error('Enhancement failed');
+                const data = await res.json();
+
+                loader.style.display = 'none';
+                resultPanel.style.display = 'block';
+                resultPanel.className = 'result-panel good';
+
+                preview.src = data.image_data;
+                const resBlob = await fetch(data.image_data).then(r => r.blob());
+                capturedBlob = resBlob;
+
+                document.getElementById('badge').textContent = 'Enhanced & Sharp';
+                document.getElementById('scoreVal').textContent = data.score.toFixed(3);
+                document.getElementById('latencyVal').innerHTML = data.latency_ms.toFixed(1) + '<span class="metric-unit">ms</span>';
+
+                const pct = Math.min(Math.max(data.score * 100, 0), 100);
+                setTimeout(() => { document.getElementById('scoreFill').style.width = pct + '%'; }, 60);
+
+                analyzeBtn.style.display = 'block';
+                enhanceBtn.style.display = 'block';
+            } catch (err) {
+                loader.style.display = 'none';
+                analyzeBtn.style.display = 'block';
+                enhanceBtn.style.display = 'block';
+                alert('Enhancement Error: ' + err.message);
+            }
+        }
+
+        function openModal() {
+            document.getElementById('contactModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('active');
+        }
+
+        // Close when clicking overlay background
+        window.addEventListener('click', e => {
+            const overlay = document.getElementById('contactModal');
+            if (e.target === overlay) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+
+</html>

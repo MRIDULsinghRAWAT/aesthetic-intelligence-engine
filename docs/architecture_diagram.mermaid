@@ -1,0 +1,33 @@
+graph TD
+    User([User / Browser])
+    
+    subgraph Flask_App["Flask Web Server (app.py)"]
+        Router["Routing Engine (/) & (/predict) & (/enhance)"]
+        Preprocess["Preprocessing (OpenCV: CLAHE / Sharpness)"]
+        TFLiteEngine["TFLite Inference Engine"]
+        TFLiteModel[("model_dynamic_quant.tflite (2.54 MB)")]
+        MLflowLogger["MLflow Logger"]
+    end
+
+    subgraph MLOps_Backend["MLOps Backend"]
+        MLflowRun[("MLflow Tracking Run (mlflow.db)")]
+    end
+
+    User -->|1. Upload Image / Snap Camera| Router
+    Router -->|2. Pass raw bytes| Preprocess
+    Preprocess -->|3. Resize & Normalize / Apply Contrast & Sharpness| TFLiteEngine
+    TFLiteEngine <-->|4. Invoke quantized model| TFLiteModel
+    TFLiteEngine -->|5. Output probability score| Router
+    Router -->|6. Log metrics & params| MLflowLogger
+    MLflowLogger -->|7. Write run data| MLflowRun
+    Router -->|8. JSON Response & Base64 image| User
+
+    style User fill:#ffffff,stroke:#18181b,stroke-width:1.5px,color:#18181b
+    style Router fill:#ffffff,stroke:#18181b,stroke-width:1.5px,color:#18181b
+    style Preprocess fill:#ffffff,stroke:#18181b,stroke-width:1.5px,color:#18181b
+    style TFLiteEngine fill:#ffffff,stroke:#18181b,stroke-width:1.5px,color:#18181b
+    style TFLiteModel fill:#ffffff,stroke:#18181b,stroke-width:1.5px,color:#18181b
+    style MLflowLogger fill:#ffffff,stroke:#18181b,stroke-width:1.5px,color:#18181b
+    style MLflowRun fill:#ffffff,stroke:#18181b,stroke-width:1.5px,color:#18181b
+    style Flask_App fill:#fafafa,stroke:#a1a1aa,stroke-width:1px,color:#27272a
+    style MLOps_Backend fill:#fafafa,stroke:#a1a1aa,stroke-width:1px,color:#27272a

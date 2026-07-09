@@ -1,0 +1,524 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.3:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 117-868-825
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 12:55:00] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 12:55:00] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 12:55:00] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:root:score=0.973, label=Good Aesthetic, latency=65.85ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 12:56:10] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.3:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 117-868-825
+INFO:root:score=0.953, label=Good Aesthetic, latency=39.19ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 12:59:34] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.097, label=Bad Aesthetic, latency=38.98ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 12:59:49] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:01:05] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.3:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 117-868-825
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.3:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 117-868-825
+INFO:werkzeug: * Detected change in 'C:\\Users\\Mridul\\Desktop\\aesthetic-intelligence-engine\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\Mridul\\Desktop\\aesthetic-intelligence-engine\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\Mridul\\Desktop\\aesthetic-intelligence-engine\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\Mridul\\Desktop\\aesthetic-intelligence-engine\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 117-868-825
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.3:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.3:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.3:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.3:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:11:33] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:11:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:12:37] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:score=0.766, label=Good Aesthetic, latency=47.08ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:13:31] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:14:27] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:14:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:root:score=0.756, label=Good Aesthetic, latency=31.93ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:14:43] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.011, label=Bad Aesthetic, latency=34.25ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:14:57] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.011, label=Bad Aesthetic, latency=37.06ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:15:02] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.973, label=Good Aesthetic, latency=40.21ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:15:25] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:17:30] "GET / HTTP/1.1" 200 -
+INFO:root:score=0.971, label=Good Aesthetic, latency=35.29ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:17:42] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.002, label=Bad Aesthetic, latency=40.59ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:18:03] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.453, label=Bad Aesthetic, latency=29.86ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:18:12] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.453, label=Bad Aesthetic, latency=33.32ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:18:15] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.973, label=Good Aesthetic, latency=30.04ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:18:35] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.926, label=Good Aesthetic, latency=36.53ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:20:42] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.912, label=Good Aesthetic, latency=42.23ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:20:54] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.005, label=Bad Aesthetic, latency=45.00ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:21:07] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:31:13] "GET / HTTP/1.1" 200 -
+INFO:root:score=1.000, label=Good Aesthetic, latency=59.25ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:31:35] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.033, label=Bad Aesthetic, latency=38.38ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:31:53] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:34:54] "GET / HTTP/1.1" 200 -
+INFO:root:score=0.690, label=Good Aesthetic, latency=32.16ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:35:04] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:37:35] "GET / HTTP/1.1" 200 -
+INFO:root:score=0.876, label=Good Aesthetic, latency=32.27ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:37:44] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:40:35] "GET / HTTP/1.1" 200 -
+INFO:root:score=0.852, label=Good Aesthetic, latency=23.69ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:40:42] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.852, label=Good Aesthetic, latency=22.98ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:40:49] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:43:21] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:43:27] "GET / HTTP/1.1" 200 -
+INFO:root:score=0.852, label=Good Aesthetic, latency=37.12ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:43:35] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:43:46] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:43:46] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:root:score=0.357, label=Bad Aesthetic, latency=21.30ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:43:53] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:46:52] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:46:52] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:root:score=0.852, label=Good Aesthetic, latency=20.41ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:46:58] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:48:55] "GET / HTTP/1.1" 200 -
+INFO:root:score=0.852, label=Good Aesthetic, latency=85.09ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:49:11] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:51:24] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:51:24] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:root:score=0.852, label=Good Aesthetic, latency=42.98ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:51:32] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:52:08] "GET / HTTP/1.1" 200 -
+INFO:root:score=0.090, label=Bad Aesthetic, latency=26.72ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:52:15] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:56:52] "GET / HTTP/1.1" 200 -
+INFO:root:score=0.852, label=Good Aesthetic, latency=32.87ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:57:07] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 13:59:56] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:00:00] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:00:31] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:00:32] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:00:32] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:02:35] "GET / HTTP/1.1" 200 -
+INFO:root:score=0.876, label=Good Aesthetic, latency=156.43ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:02:47] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:04:11] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:07:29] "GET / HTTP/1.1" 200 -
+INFO:root:score=0.453, label=Bad Aesthetic, latency=36.10ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:07:50] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.978, label=Good Aesthetic, latency=28.08ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:11:49] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:14:21] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:14:21] "GET /mridul.jpg HTTP/1.1" 200 -
+INFO:root:score=0.939, label=Good Aesthetic, latency=33.34ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:15:05] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:18:35] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:18:35] "GET /mridul_avatar.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:18:35] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:28:14] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:28:14] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:28:14] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:30:05] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:30:05] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:30:05] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:score=0.939, label=Good Aesthetic, latency=37.65ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:31:04] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:31:28] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:31:28] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:31:28] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:33:20] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:33:20] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 14:33:20] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:score=0.064, label=Bad Aesthetic, latency=138.63ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:20:56] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.999, label=Good Aesthetic, latency=188.17ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:21:00] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:26:05] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:26:06] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:26:06] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:31:57] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:31:57] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:31:57] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:37:08] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:37:08] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:37:08] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:score=0.939, label=Good Aesthetic, latency=43.74ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:37:32] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.921, label=Good Aesthetic, latency=28.87ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:39:18] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:40:48] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:40:48] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:40:48] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:root:score=0.977, label=Good Aesthetic, latency=59.13ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:55:45] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:59:20] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:59:21] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:59:21] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:root:score=0.939, label=Good Aesthetic, latency=55.95ms
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 15:59:40] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:00:29] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:00:29] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:00:29] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:02:22] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:02:22] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:02:22] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:04:26] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:04:26] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:04:26] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:04:40] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:04:41] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:04:41] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:04:45] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:04:45] "GET /mridul_avatar.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:04:45] "GET /mridul.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:04:46] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:05:12] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:05:12] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:05:12] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:05:27] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:05:27] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:05:27] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:05:32] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:05:32] "GET /mridul_avatar.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:05:32] "GET /mridul.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:05:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:06:25] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:06:25] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:06:25] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:07:56] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:07:56] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:07:56] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:08:45] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:08:45] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:08:45] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:11:01] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:11:01] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:11:01] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:root:score=0.001, label=Bad Aesthetic, latency=48.20ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:11:42] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.999, label=Good Aesthetic, latency=27.83ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:11:52] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:21:11] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:21:12] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:21:12] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:root:score=0.018, label=Bad Aesthetic, latency=44.83ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:21:37] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:21:41] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:21:58] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:21:58] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:21:58] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:root:score=0.760, label=Good Aesthetic, latency=106.19ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:15] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:19] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:21] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:23] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:25] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:26] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:27] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:28] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:29] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:29] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:30] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:26:31] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:score=0.939, label=Good Aesthetic, latency=40.60ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:33:38] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:33:41] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:33:42] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:33:43] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:33:45] "POST /enhance HTTP/1.1" 200 -
+INFO:root:score=0.931, label=Good Aesthetic, latency=33.15ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:30] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:34] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:36] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:37] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:38] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:39] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:40] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:40] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:41] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:41] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:42] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:42] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:43] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:43] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:44] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:44] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:45] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:48] "POST /enhance HTTP/1.1" 200 -
+INFO:root:score=0.871, label=Good Aesthetic, latency=47.60ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:35:50] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:36:26] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:36:26] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:36:26] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:score=0.847, label=Good Aesthetic, latency=56.74ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:36:55] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:37:01] "POST /enhance HTTP/1.1" 200 -
+INFO:root:score=0.033, label=Bad Aesthetic, latency=47.04ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:37:15] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:43:37] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:43:37] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:43:37] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:root:score=0.514, label=Good Aesthetic, latency=81.82ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:44:38] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:44:52] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:44:53] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:44:55] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:44:57] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:44:58] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:45:15] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:45:15] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:45:15] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:root:score=0.524, label=Good Aesthetic, latency=37.32ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:45:41] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:45:44] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:45:46] "POST /enhance HTTP/1.1" 200 -
+INFO:root:score=0.022, label=Bad Aesthetic, latency=37.28ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:46:02] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.001, label=Bad Aesthetic, latency=38.93ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:46:45] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:46:47] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:46:50] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:46:52] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:47:48] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:47:49] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:47:50] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:47:51] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:47:52] "POST /enhance HTTP/1.1" 200 -
+INFO:root:score=0.436, label=Bad Aesthetic, latency=25.95ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:54:18] "POST /predict HTTP/1.1" 200 -
+INFO:root:score=0.133, label=Bad Aesthetic, latency=42.03ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:54:40] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:54:42] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 16:54:43] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 17:07:52] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 17:07:52] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 17:07:52] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 17:20:59] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 17:20:59] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 17:20:59] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:root:score=0.033, label=Bad Aesthetic, latency=154.73ms
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 17:21:22] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 17:21:24] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 17:23:44] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 17:23:44] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [09/Jul/2026 17:23:44] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
