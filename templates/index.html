@@ -451,6 +451,107 @@
             background: var(--bad-color);
         }
 
+        /* ============ MLOPS CARD ============ */
+        .mlops-card {
+            margin-top: 32px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .mlops-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mlops-status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .mlops-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #f1f5f9;
+            padding-bottom: 8px;
+        }
+
+        .mlops-row:last-of-type {
+            margin-bottom: 20px;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .mlops-label {
+            color: var(--text-caption);
+        }
+
+        .mlops-val {
+            font-weight: 600;
+        }
+
+        .mlops-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-mlops {
+            flex: 1;
+            padding: 10px 14px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-mlops-update {
+            background: var(--accent-black);
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-mlops-update:hover {
+            opacity: 0.85;
+        }
+
+        .btn-mlops-rollback {
+            background: #ffffff;
+            color: var(--accent-black);
+            border: 1px solid var(--accent-black);
+        }
+
+        .btn-mlops-rollback:hover {
+            background: var(--accent-black);
+            color: #ffffff;
+        }
+
         /* ============ FOOTER ============ */
         .page-footer {
             margin-top: 36px;
@@ -711,8 +812,31 @@
                 Upload an image to begin evaluation
             </p>
 
+            <!-- MLOps Controller Card -->
+            <div class="mlops-card">
+                <div class="mlops-title">
+                    <span>MLOps Model Controller</span>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <span class="mlops-status-dot"></span>
+                        <span style="font-size:0.6rem; color:var(--good-color); font-weight:700;">Live Reload Ready</span>
+                    </div>
+                </div>
+                <div class="mlops-row">
+                    <span class="mlops-label">Active Model Version</span>
+                    <span class="mlops-val" id="activeVersionLabel">v1.0.0</span>
+                </div>
+                <div class="mlops-row">
+                    <span class="mlops-label">Active Model Path</span>
+                    <span class="mlops-val" id="activePathLabel" style="font-family: monospace; font-size: 0.7rem;">models/model_dynamic_quant.tflite</span>
+                </div>
+                <div class="mlops-actions">
+                    <button class="btn-mlops btn-mlops-update" onclick="updateModelVersion('v2.0.0')">Deploy v2.0.0 (Upgrade)</button>
+                    <button class="btn-mlops btn-mlops-rollback" onclick="updateModelVersion('v1.0.0')">Rollback to v1.0.0</button>
+                </div>
+            </div>
+
             <footer class="page-footer">
-                On-device Model: <span>model_dynamic_quant.tflite</span>
+                On-device Model: <span id="footerModelPath">model_dynamic_quant.tflite</span>
             </footer>
         </div>
 
@@ -870,7 +994,7 @@
                 resultPanel.style.display = 'block';
                 resultPanel.className = 'result-panel ' + (data.score > 0.5 ? 'good' : 'bad');
 
-                document.getElementById('badge').textContent = data.label;
+                document.getElementById('badge').textContent = `${data.label} (${data.model_version})`;
                 document.getElementById('scoreVal').textContent = data.score.toFixed(3);
                 document.getElementById('latencyVal').innerHTML = data.latency_ms.toFixed(1) + '<span class="metric-unit">ms</span>';
 
@@ -912,7 +1036,7 @@
                 const resBlob = await fetch(data.image_data).then(r => r.blob());
                 capturedBlob = resBlob;
 
-                document.getElementById('badge').textContent = 'Enhanced & Sharp';
+                document.getElementById('badge').textContent = `Enhanced & Sharp (${data.model_version})`;
                 document.getElementById('scoreVal').textContent = data.score.toFixed(3);
                 document.getElementById('latencyVal').innerHTML = data.latency_ms.toFixed(1) + '<span class="metric-unit">ms</span>';
 
@@ -944,6 +1068,77 @@
                 closeModal();
             }
         });
+
+        // Fetch current model status on page load
+        async function fetchModelStatus() {
+            try {
+                const res = await fetch('/model/status');
+                if (!res.ok) throw new Error('Failed to fetch model status');
+                const data = await res.json();
+                
+                document.getElementById('activeVersionLabel').textContent = data.active_version;
+                document.getElementById('activePathLabel').textContent = data.active_model_path;
+                document.getElementById('footerModelPath').textContent = data.active_model_path.split('/').pop().split('\\').pop();
+            } catch (err) {
+                console.error('Error fetching model status:', err);
+            }
+        }
+
+        // Trigger dynamic model update / rollback
+        async function updateModelVersion(version) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const skipConfirm = urlParams.get('test') === 'true';
+            
+            if (!skipConfirm) {
+                const confirmMsg = `Are you sure you want to dynamically reallocate the edge model to version ${version}?`;
+                if (!confirm(confirmMsg)) return;
+            }
+
+            // Show loader
+            loader.style.display = 'block';
+            analyzeBtn.style.display = 'none';
+            enhanceBtn.style.display = 'none';
+            resultPanel.style.display = 'none';
+
+            try {
+                const res = await fetch('/model/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ version: version })
+                });
+                
+                if (!res.ok) throw new Error('Model update request failed');
+                const data = await res.json();
+                
+                // Update UI Labels
+                document.getElementById('activeVersionLabel').textContent = data.active_version;
+                document.getElementById('activePathLabel').textContent = data.active_model_path;
+                document.getElementById('footerModelPath').textContent = data.active_model_path.split('/').pop().split('\\').pop();
+                
+                if (!skipConfirm) {
+                    alert(`Success: ${data.message}\nModel file size: ${(data.size_bytes / (1024*1024)).toFixed(2)} MB`);
+                } else {
+                    console.log(`Success: ${data.message}`);
+                }
+            } catch (err) {
+                if (!skipConfirm) {
+                    alert('Update Error: ' + err.message);
+                } else {
+                    console.error('Update Error: ' + err.message);
+                }
+            } finally {
+                loader.style.display = 'none';
+                analyzeBtn.style.display = 'block';
+                // Only show enhance if we have an image
+                const file = getActiveFile();
+                if (file) {
+                    enhanceBtn.style.display = 'block';
+                }
+            }
+        }
+
+        // Call on load
+        window.addEventListener('DOMContentLoaded', fetchModelStatus);
     </script>
 </body>
 

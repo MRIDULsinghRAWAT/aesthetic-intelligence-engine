@@ -136,3 +136,41 @@ To view logged runs, scores, and performance latencies:
    http://localhost:5000
    ```
    *(Or the port specified in the terminal, such as http://localhost:5001 if port 5000 is occupied).*
+
+---
+
+## 9. Edge & Mobile Deployment (Raspberry Pi & Android)
+
+To run the Aesthetic Intelligence Engine on a local edge server and access it from mobile clients:
+
+### Raspberry Pi Native Install
+1. Run the installer script to automatically setup system dependencies and the lightweight `tflite-runtime`:
+   ```bash
+   chmod +x deploy_raspberry_pi.sh
+   ./deploy_raspberry_pi.sh
+   ```
+2. Start the server (binds to `0.0.0.0` for network sharing):
+   ```bash
+   source .venv/bin/activate
+   python app.py
+   ```
+
+### Docker Containerized Setup
+1. Build the Docker image:
+   ```bash
+   docker build -t aesthetic-intelligence-engine .
+   ```
+2. Run the container:
+   ```bash
+   docker run -p 5000:5000 aesthetic-intelligence-engine
+   ```
+
+### Android Wi-Fi Setup
+1. Connect both the host machine and the Android phone to the **same Wi-Fi network**.
+2. Find the local IP address of your host machine (e.g. `192.168.1.X`).
+3. On the Android phone, open Chrome or Firefox and navigate to:
+   ```
+   http://192.168.1.X:5000
+   ```
+4. Click **"Use Web Camera"**, grant camera access, and test the dynamic aesthetic evaluation and sharpening filters live.
+

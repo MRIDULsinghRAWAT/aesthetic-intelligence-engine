@@ -96,3 +96,50 @@ pip install flask tensorflow opencv-python mlflow
    mlflow ui --backend-store-uri sqlite:///mlflow.db
    ```
    Then navigate to `http://localhost:5000` (or `http://localhost:5001` depending on port conflicts) to view metric distributions and parameters.
+
+---
+
+## 7. Edge & Mobile Deployment Guide
+
+To deploy this engine on-device to a **Raspberry Pi** and connect an **Android device** over the local network:
+
+### A. Raspberry Pi OS Native Setup
+1. Transfer the workspace files to the Raspberry Pi.
+2. Make the installer script executable and run it:
+   ```bash
+   chmod +x deploy_raspberry_pi.sh
+   ./deploy_raspberry_pi.sh
+   ```
+   *Note: This script automatically configures OpenCV system libraries and installs a lightweight `tflite-runtime` interpreter which uses ~15MB memory instead of standard 500MB TensorFlow.*
+3. Activate the virtual environment:
+   ```bash
+   source .venv/bin/activate
+   ```
+4. Start the Flask application, binding it to all network interfaces (`0.0.0.0`) so other devices can access it:
+   ```bash
+   python app.py
+   ```
+
+### B. Raspberry Pi OS Docker Setup
+Alternatively, containerize and run the engine using the provided Dockerfile:
+1. Build the Docker image:
+   ```bash
+   docker build -t aesthetic-intelligence-engine .
+   ```
+2. Run the container, binding port 5000:
+   ```bash
+   docker run -p 5000:5000 aesthetic-intelligence-engine
+   ```
+
+### C. Android Device Local Wi-Fi Connection
+To evaluate and enhance camera captures from your Android phone:
+1. Ensure both the Raspberry Pi (or host machine) and the Android phone are connected to the **same local Wi-Fi router**.
+2. Find the local IP address of your host machine:
+   - **Linux/Raspberry Pi**: `hostname -I` or `ifconfig`
+   - **Windows**: `ipconfig` (look for `IPv4 Address` under wireless adapter)
+3. On the Android phone, open Chrome or Firefox and navigate to:
+   ```
+   http://<your-host-ip-address>:5000
+   ```
+4. Click **"Use Web Camera"**. Give camera permissions to the browser.
+5. Capture photos on the go, score aesthetics in real-time, and run CLAHE auto-enhancement filters locally on your edge gateway.

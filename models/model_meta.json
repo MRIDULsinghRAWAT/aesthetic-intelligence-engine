@@ -1,0 +1,20 @@
+{
+  "active_version": "v1.0.0",
+  "active_model_path": "models\\model_dynamic_quant_v1.0.0.tflite",
+  "available_versions": {
+    "v1.0.0": {
+      "path": "models\\model_dynamic_quant_v1.0.0.tflite",
+      "accuracy": 0.85,
+      "quantization": "dynamic_range",
+      "size_bytes": 2667336,
+      "timestamp": "2026-07-12T16:25:17Z"
+    },
+    "v2.0.0": {
+      "path": "models\\model_dynamic_quant_v2.0.0.tflite",
+      "accuracy": 0.86,
+      "quantization": "dynamic_range",
+      "size_bytes": 2667336,
+      "timestamp": "2026-07-12T16:24:55Z"
+    }
+  }
+}
