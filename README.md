@@ -62,7 +62,9 @@ The following diagram illustrates the local image capture flow, preprocessing fi
 [User / Browser Client] ◄─────────────────────── [model_dynamic_quant_vX.tflite]
 ```
 
-A detailed high-resolution architectural schema can be found in [docs/architecture_diagram.png](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/docs/architecture_diagram.png).
+Here is the high-resolution system architecture schema:
+
+![System Architecture Schema](docs/architecture_diagram.png)
 
 ---
 
