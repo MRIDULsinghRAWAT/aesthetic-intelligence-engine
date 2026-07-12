@@ -1,4 +1,4 @@
-# 📸 Aesthetic Intelligence Engine (Æ)
+# Aesthetic Intelligence Engine (Æ)
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://python.org)
 [![ML Framework](https://img.shields.io/badge/ML%20Framework-TensorFlow%20%2F%20TFLite-orange?logo=tensorflow&logoColor=white)](https://tensorflow.org)
