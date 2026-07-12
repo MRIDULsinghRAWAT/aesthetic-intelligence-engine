@@ -24,7 +24,30 @@ except ImportError:
         raise ImportError("Please install either 'tensorflow' or 'tflite_runtime' to run inference.")
 
 app = Flask(__name__)
-logging.basicConfig(filename='inference_logs.txt', level=logging.INFO)
+
+# Detect if running in Vercel environment
+IS_VERCEL = os.environ.get("VERCEL") == "1"
+BASE_DIR = "/tmp" if IS_VERCEL else "."
+
+# Setup logging path dynamically
+log_file = os.path.join(BASE_DIR, "inference_logs.txt")
+logging.basicConfig(filename=log_file, level=logging.INFO, force=True)
+
+# If on Vercel, copy model files to writable /tmp directory on startup
+if IS_VERCEL:
+    os.makedirs(os.path.join(BASE_DIR, "models"), exist_ok=True)
+    for fname in ["model_meta.json", "model_dynamic_quant.tflite", "model_dynamic_quant_v1.0.0.tflite", "model_dynamic_quant_v2.0.0.tflite"]:
+        src_path = os.path.join("models", fname)
+        dest_path = os.path.join(BASE_DIR, "models", fname)
+        if os.path.exists(src_path) and not os.path.exists(dest_path):
+            shutil.copy(src_path, dest_path)
+            
+    # Set MLflow tracking URI to writable /tmp database
+    try:
+        import mlflow
+        mlflow.set_tracking_uri("sqlite:////tmp/mlflow.db")
+    except Exception:
+        pass
 
 # Thread safety lock for model loading and inference
 model_lock = threading.Lock()
@@ -33,28 +56,43 @@ interpreter = None
 input_details = None
 output_details = None
 current_model_version = "v1.0.0"
-current_model_path = "models/model_dynamic_quant.tflite"
+current_model_path = os.path.join(BASE_DIR, "models", "model_dynamic_quant.tflite")
 
 def load_model_meta():
+    meta_path = os.path.join(BASE_DIR, "models", "model_meta.json")
     try:
-        with open("models/model_meta.json", "r") as f:
+        with open(meta_path, "r") as f:
             return json.load(f)
     except Exception as e:
         logging.error(f"Error loading model_meta.json: {e}")
+        # Fallback to local copy if read failed
+        fallback_path = "models/model_meta.json"
+        if os.path.exists(fallback_path):
+            try:
+                with open(fallback_path, "r") as f:
+                    return json.load(f)
+            except Exception:
+                pass
         return {
             "active_version": "v1.0.0",
-            "active_model_path": "models/model_dynamic_quant.tflite"
+            "active_model_path": os.path.join(BASE_DIR, "models", "model_dynamic_quant.tflite")
         }
 
 def save_model_meta(meta):
+    meta_path = os.path.join(BASE_DIR, "models", "model_meta.json")
     try:
-        with open("models/model_meta.json", "w") as f:
+        with open(meta_path, "w") as f:
             json.dump(meta, f, indent=2)
     except Exception as e:
         logging.error(f"Error saving model_meta.json: {e}")
 
 def init_interpreter(model_path, version):
     global interpreter, input_details, output_details, current_model_version, current_model_path
+    
+    # Ensure correct base path prefix on Vercel if database stored a relative dot path
+    if IS_VERCEL and model_path.startswith("models/"):
+        model_path = os.path.join(BASE_DIR, model_path)
+        
     logging.info(f"Initializing TFLite Interpreter for model: {model_path} ({version})")
     
     new_interpreter = InterpreterClass(model_path=model_path)
@@ -106,9 +144,9 @@ def update_model():
     meta = load_model_meta()
     
     # Save folder and file name configuration
-    os.makedirs("models", exist_ok=True)
+    os.makedirs(os.path.join(BASE_DIR, "models"), exist_ok=True)
     target_filename = f"model_dynamic_quant_{version}.tflite"
-    target_path = os.path.join("models", target_filename)
+    target_path = os.path.join(BASE_DIR, "models", target_filename)
     
     try:
         if url:
@@ -117,9 +155,18 @@ def update_model():
         else:
             # Simulation fallback: copy active or v1.0.0 model if file doesn't exist
             if not os.path.exists(target_path):
-                base_model = meta.get("available_versions", {}).get("v1.0.0", {}).get("path", "models/model_dynamic_quant.tflite")
+                base_model = meta.get("available_versions", {}).get("v1.0.0", {}).get("path", "")
+                
+                # Normalize base model path selection
+                if not base_model:
+                    base_model = os.path.join("models", "model_dynamic_quant.tflite")
+                if IS_VERCEL and base_model.startswith("models/"):
+                    base_model = os.path.join(BASE_DIR, base_model)
+                
+                # If /tmp model is missing, fall back to read-only workspace file
                 if not os.path.exists(base_model):
                     base_model = "models/model_dynamic_quant.tflite"
+                    
                 logging.info(f"Simulating remote download for {version}. Copying {base_model} to {target_path}...")
                 shutil.copy(base_model, target_path)
         

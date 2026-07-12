@@ -170,8 +170,19 @@ pip install flask numpy opencv-python mlflow tensorflow
    docker run -p 5000:5000 aesthetic-intelligence-engine
    ```
 
+### Option C: Vercel Serverless Cloud Deployment
+1. Install Vercel CLI:
+   ```bash
+   npm install -g vercel
+   ```
+2. Deploy directly:
+   ```bash
+   vercel --prod
+   ```
+   *Note: Our application automatically detects the Vercel cloud environment (`VERCEL=1` variable) and redirects dynamic writes (model downloads, logs, MLflow SQLite telemetry) to `/tmp/` to bypass the serverless read-only filesystem restriction. Dependencies are automatically kept under 50MB by utilizing `tflite-runtime` instead of full TensorFlow.*
+
 ### Connecting from Android over local Wi-Fi
 1. Connect both the host machine (Raspberry Pi/laptop) and your Android phone to the **same Wi-Fi network**.
 2. Find the local network IP address of your host machine (e.g. `192.168.1.15`).
-3. On the Android phone browser, go to `http://192.168.1.15:5000`.
+3. On the Android phone browser, go to `http://192.168.1.15:5000` (or your Vercel deployment URL).
 4. Click **"Use Web Camera"** to capture and analyze image aesthetics in real time!
