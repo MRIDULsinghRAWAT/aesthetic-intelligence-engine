@@ -703,3 +703,14 @@ INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 21:52:04] "POST /model/update HTTP/1.1"
 INFO:root:Initializing TFLite Interpreter for model: models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
 INFO:root:Successfully updated model dynamically to version v2.0.0
 INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 21:54:04] "POST /model/update HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
+INFO:root:Successfully updated model dynamically to version v2.0.0
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 21:54:55] "POST /model/update HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 21:55:04] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 21:55:06] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 21:55:08] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 21:55:09] "POST /enhance HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: models\model_dynamic_quant_v1.0.0.tflite (v1.0.0)
+INFO:root:Successfully updated model dynamically to version v1.0.0
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 21:55:17] "POST /model/update HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 21:55:23] "POST /enhance HTTP/1.1" 200 -

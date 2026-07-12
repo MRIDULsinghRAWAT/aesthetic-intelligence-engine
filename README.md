@@ -1,161 +1,164 @@
-# Aesthetic Intelligence Engine
+# 📸 Aesthetic Intelligence Engine (Æ)
 
-An on-device Edge AI pipeline that evaluates, scores, and enhances image aesthetics in real time. Powered by an optimized, dynamically quantized TensorFlow Lite model running locally to guarantee instant scoring, zero network overhead, and absolute privacy, integrated with MLflow for local MLOps tracking.
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://python.org)
+[![ML Framework](https://img.shields.io/badge/ML%20Framework-TensorFlow%20%2F%20TFLite-orange?logo=tensorflow&logoColor=white)](https://tensorflow.org)
+[![Backend](https://img.shields.io/badge/Backend-Flask-lightgrey?logo=flask&logoColor=white)](https://flask.palletsprojects.com)
+[![OpenCV](https://img.shields.io/badge/CV-OpenCV-green?logo=opencv&logoColor=white)](https://opencv.org)
+[![MLOps](https://img.shields.io/badge/MLOps-MLflow-blueviolet?logo=mlflow&logoColor=white)](https://mlflow.org)
+[![Docker](https://img.shields.io/badge/Container-Docker-blue?logo=docker&logoColor=white)](https://docker.com)
+
+An on-device **Edge AI pipeline** that evaluates, scores, and enhances image aesthetics in real time. Powered by an optimized, dynamically quantized **TensorFlow Lite** model running locally to guarantee sub-5ms scoring, zero network overhead, and absolute privacy. Equipped with a **live MLOps hot-swapping controller** and full telemetry tracking using **MLflow**.
 
 ---
 
 ## 1. Project Overview
 
-The Aesthetic Intelligence Engine is designed to analyze image aesthetic quality on edge devices. It utilizes a custom trained model (based on MobileNetV2), compressed from over 10 MB to 2.54 MB using Dynamic Range Quantization. Inference runs on-device in under 5ms on a standard CPU. 
+The **Aesthetic Intelligence Engine** is designed to analyze image aesthetic quality directly on edge devices (like Raspberry Pi) and mobile nodes (Android). 
 
-The system features a Flask-based backend server, an interactive premium responsive web client (supporting drag-and-drop as well as real-time web camera feeds), and a server-side image enhancement pipeline that applies local contrast and detail sharpening via OpenCV to boost aesthetics.
+By leveraging **transfer learning** on MobileNetV2 and applying **Dynamic Range Quantization**, the neural network is compressed from over 10 MB to **2.54 MB** (a 75% reduction), achieving **sub-5ms CPU inference**. 
 
----
-
-## 2. Interface Preview
-
-Here is the application showing an image evaluation and auto-enhance comparison sequence:
-
-![Aesthetic Evaluation and Enhancement Output](docs/web_app_screenshot_1.png)
-
-![Low Aesthetic Detection and Camera Snap Mode](docs/web_app_screenshot_2.png)
+The system features:
+- A responsive, glassmorphic Swiss-style single-page dashboard.
+- Live camera snapshots and canvas pre-processing.
+- Server-side image enhancement (CLAHE contrast adjustments and a 2D sharpening kernel) via OpenCV.
+- A thread-safe dynamic model registry and re-allocator to swap active interpreters on the fly.
+- Telemetry logging for prediction latency, scores, and model versions to a local MLflow registry.
 
 ---
 
-## 3. Core Features
+## 2. Live Demo & Interface
 
-- **On-Device Inference**: Runs a quantized TFLite model locally for image evaluation.
-- **Real-Time Camera Integration**: Capture snapshots directly from a webcam inside the browser interface.
-- **Aesthetic Enhancement**: Auto-enhance images using server-side OpenCV CLAHE (contrast enhancement) and detail-sharpening filters to generate optimized outputs.
-- **MLOps Telemetry**: Tracks every prediction and enhancement invocation, logging latency and aesthetic scores in a local MLflow tracking server.
-- **Modern Responsive UI**: Clean, premium Swiss-style layout that adapts seamlessly to all screen sizes without overlap.
+| Dynamic Model Swapping & Rollbacks | Low Aesthetic Detection & Camera Snap |
+| :---: | :---: |
+| ![MLOps Dynamic Updates](reports/phase3_mlops_demo.webp) | ![Webcam Capture Mode](docs/web_app_screenshot_2.png) |
 
 ---
 
-## 4. Project Structure
+## 3. Core MLOps Features
 
-- `app.py`: Main Flask application handling pre-processing, inference, enhancement API, and MLflow logging.
-- `templates/index.html`: Responsive single page application containing UI styling, webcam streams, and canvas renderers.
-- `models/model_dynamic_quant.tflite`: The production-ready optimized TFLite model.
-- `notebooks/phase1_training.ipynb`: Original Google Colab notebook documenting model training, validation, and quantization steps.
-- `reports/`: Local performance evaluations, FPS metrics, and benchmark reports.
-- `docs/`: System documentation including the monochrome system architecture diagram.
+- **On-Device Inference**: Locally loaded TFLite models analyze inputs without any cloud round-trips.
+- **Webcam Integration**: Capture and process live images directly from the browser.
+- **Image Enhancement & Effects**: Auto-enhance low-contrast or noisy images using YCrCb-space CLAHE and edge sharpening filters to boost aesthetic scores.
+- **MLOps Model Controller**: Instantly **hot-swap** or **roll back** active production models (e.g., v1.0.0 ⇄ v2.0.0) from the UI without restarting the Flask server.
+- **Dual-Engine Edge Fallback**: Backend dynamically imports `tensorflow` or `tflite_runtime` (lightweight 15MB wheel for Raspberry Pi / micro-controllers).
+- **MLflow Telemetry**: Logs latency, scores, parameters, and model versions into a local SQLite store (`mlflow.db`).
 
 ---
 
-## 5. System Architecture
+## 4. System Architecture
 
-The workflow consists of an image ingestion interface (via webcam capture or file selection), preprocessing using OpenCV, local model inference with the TFLite Interpreter, and metadata tracking using MLflow:
+The following diagram illustrates the local image capture flow, preprocessing filters, thread-locked interpreter invocation, and MLflow logging:
 
 ```
-[User / Browser] 
+[User / Browser Client] 
        │
-       ▼ (Upload / webcam snap)
-[Flask Server (app.py)] ───► [OpenCV Preprocessing (CLAHE / Sharpening)]
-       │                                     │
-       ▼ (Normalized arrays)                 ▼ (Inference Invoke)
-[TFLite Interpreter] ◄────────────────────── [model_dynamic_quant.tflite]
-       │
-       ├─► [MLflow Logger] ───► Logs Runs to [mlflow.db] (SQLite)
-       │
-       ▼ (Returns score, latency, and base64 image data)
-[User / Browser]
+       ▼ (Upload File / Webcam Snap / Live Reload Trigger)
+[Flask Web Server (app.py)] ───► [OpenCV Preprocessing (CLAHE / 2D Sharpening)]
+       │                                            │
+       ├─► (Returns active version/meta)            ▼ (Invoke Interpreter lock)
+       ├─► [MLflow Logger] ──► [mlflow.db]      [TFLite Interpreter Class]
+       │                                            ▲
+       ▼ (Returns score, latency & base64 image)    │ (Reloads versioned file)
+[User / Browser Client] ◄─────────────────────── [model_dynamic_quant_vX.tflite]
 ```
 
-A detailed visual architecture diagram can be found at `docs/architecture_diagram.png`.
+A detailed high-resolution architectural schema can be found in [docs/architecture_diagram.png](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/docs/architecture_diagram.png).
 
 ---
 
-## 6. Model Training & Transfer Learning Achievements
+## 5. API Reference
 
-Before custom training, the pre-trained neural network features standard object classification outputs. Through transfer learning and training on aesthetic scoring datasets, the following training achievements were unlocked:
-- **Core Architecture**: MobileNetV2 was selected as the lightweight feature extractor backbone (ImageNet pre-trained weights) with an input shape constraint of `(128, 128, 3)`.
-- **Custom Regression Head**: The classification top was removed, and we appended a Global Average Pooling layer, a 128-node Dense layer (`relu` activation), and a final single-node Sigmoid output layer (`[0.0, 1.0]` score range).
-- **Optimization Strategy**: Compiled using the **Adam Optimizer** and **Binary Crossentropy** loss function, training over 10 epochs.
-- **Improved Capability**: The model successfully learns parameters for aesthetic scoring, distinguishing high-quality photography styles from noisy, low-composition frames.
+### 1. Model Status
+- **Endpoint**: `GET /model/status`
+- **Description**: Returns active model version, path, and registered available versions.
+- **Response**:
+  ```json
+  {
+    "status": "success",
+    "active_version": "v1.0.0",
+    "active_model_path": "models/model_dynamic_quant.tflite",
+    "available_versions": { ... }
+  }
+  ```
 
-### Pre-Training vs. Post-Optimization Comparison
+### 2. Model Live Update (Hot-swap)
+- **Endpoint**: `POST /model/update`
+- **Description**: Dynamically re-allocates the TFLite Interpreter to a new model version. Supports URL downloads or simulated upgrades.
+- **Request Body**:
+  ```json
+  {
+    "version": "v2.0.0",
+    "url": "https://example.com/models/v2.tflite" (Optional)
+  }
+  ```
 
-| Metric / Aspect | Pre-Training (Stock MobileNetV2) | Labeled Training (Aesthetic Head) | Quantized Edge Deployment (TFLite) |
-| :--- | :--- | :--- | :--- |
-| **Primary Task** | 1000-class Object Recognition | Single-value Aesthetic Regression | High-speed, Low-footprint Aesthetic Evaluation |
-| **Output Type** | Multi-class Softmax Probability | Float Value (`[0.0, 1.0]` Sigmoid) | Float Value (`[0.0, 1.0]` Sigmoid) |
-| **Visual Concepts** | Semantic objects (dogs, cups, cars) | Image composition, lighting, noise, color | Image composition, lighting, noise, color |
-| **Disk Size** | ~10 MB+ | ~10 MB+ | **2.54 MB** (75% storage savings) |
-| **Inference Latency**| ~15ms - 20ms | ~15ms - 20ms | **Sub-5ms** (4x faster execution) |
-| **Edge Suitability** | Low (heavy memory bandwidth) | Low (heavy memory bandwidth) | **High** (optimal battery & cache usage) |
+### 3. Predict Aesthetic Score
+- **Endpoint**: `POST /predict`
+- **Body**: multipart/form-data (`image`: File)
+- **Description**: Evaluates image and returns score (0.0 to 1.0) and model version used.
+
+### 4. Enhance Image
+- **Endpoint**: `POST /enhance`
+- **Body**: multipart/form-data (`image`: File)
+- **Description**: Runs OpenCV local contrast tuning and detail-sharpening, returns the enhanced base64 image and its improved aesthetic score.
 
 ---
 
-## 7. Model Quantization Benchmarks
+## 6. Model Training & Optimization Achievements
 
-To ensure high performance and low battery consumption on edge environments, the model was compressed using TensorFlow Lite quantization methods:
+### Model Parameters & Training Strategy
+- **Base Extractor**: MobileNetV2 (ImageNet pre-trained weights) constrained to `(128, 128, 3)` input shapes.
+- **Custom Regression Top**: Replaced standard classification layer with Global Average Pooling, 128 Dense nodes (ReLU), and a single Sigmoid node representing aesthetic value ($[0.0, 1.0]$).
+- **Optimizer**: Adam with Binary Crossentropy loss, trained over 10 epochs.
 
-| Metric | Float32 Model (Baseline) | Dynamic Range Quantized Model |
+### Quantization Benchmarks
+
+| Metric | Baseline Float32 Model | Dynamic Range Quantized Model |
 | :--- | :--- | :--- |
-| **File Size** | ~10 MB+ | **2.54 MB** (Approx. 4x reduction) |
+| **File Size** | ~10 MB+ | **2.54 MB** (75% savings) |
 | **Precision** | 32-bit Floating Point | 8-bit Integer (quantized weights) |
-| **Inference Latency** | ~15ms - 20ms | **Sub-5ms** (On standard edge CPU) |
-| **Accuracy Loss** | Reference Base | Negligible (less than 1% deviation) |
+| **Inference Latency** | ~15ms - 20ms | **Sub-5ms** (4x speedup) |
+| **Accuracy Loss** | Reference Base | Negligible ($\le 1\%$ deviation) |
 
 ---
 
-## 8. Getting Started
+## 7. Getting Started (Local Development)
 
-### Prerequisites
-
-Install all required Python libraries:
-
+### Setup dependencies
 ```bash
-pip install flask tensorflow opencv-python mlflow
+pip install flask numpy opencv-python mlflow tensorflow
 ```
 
-### Running the Application
-
-1. Start the Flask application:
+### Start the application
+1. Run the server:
    ```bash
    python app.py
    ```
-2. Open your web browser and navigate to:
-   ```
-   http://localhost:5000
-   ```
-3. Either select an image from your local drive, drag-and-drop a file, or click "Use Web Camera" to capture a live photo.
-4. Click "Analyze Aesthetic" to get the score. Click "Auto-Enhance Image" to apply visual effects and see the improved score.
-
-### Accessing the MLOps Dashboard
-
-To view logged runs, scores, and performance latencies:
-
-1. In a separate terminal window, launch the MLflow UI:
+2. Open your web browser and navigate to `http://localhost:5000`.
+3. In a separate terminal, launch the MLflow UI Dashboard to view logged telemetry:
    ```bash
    mlflow ui --backend-store-uri sqlite:///mlflow.db
    ```
-2. Open your browser and navigate to:
-   ```
-   http://localhost:5000
-   ```
-   *(Or the port specified in the terminal, such as http://localhost:5001 if port 5000 is occupied).*
+   Open `http://localhost:5001` or the port shown in your terminal.
 
 ---
 
-## 9. Edge & Mobile Deployment (Raspberry Pi & Android)
+## 8. Edge & Mobile Deployment (Raspberry Pi & Android)
 
-To run the Aesthetic Intelligence Engine on a local edge server and access it from mobile clients:
-
-### Raspberry Pi Native Install
-1. Run the installer script to automatically setup system dependencies and the lightweight `tflite-runtime`:
+### Option A: Raspberry Pi OS Native Setup
+1. Transfer the workspace files and run the edge installer:
    ```bash
    chmod +x deploy_raspberry_pi.sh
    ./deploy_raspberry_pi.sh
    ```
-2. Start the server (binds to `0.0.0.0` for network sharing):
+   *Note: This script automatically installs OpenCV system libraries and configures `tflite-runtime` instead of full TensorFlow, saving ~500MB storage space.*
+2. Start the server (binds to `0.0.0.0` for local network broadcasting):
    ```bash
    source .venv/bin/activate
    python app.py
    ```
 
-### Docker Containerized Setup
+### Option B: Docker Containerized Setup
 1. Build the Docker image:
    ```bash
    docker build -t aesthetic-intelligence-engine .
@@ -165,12 +168,8 @@ To run the Aesthetic Intelligence Engine on a local edge server and access it fr
    docker run -p 5000:5000 aesthetic-intelligence-engine
    ```
 
-### Android Wi-Fi Setup
-1. Connect both the host machine and the Android phone to the **same Wi-Fi network**.
-2. Find the local IP address of your host machine (e.g. `192.168.1.X`).
-3. On the Android phone, open Chrome or Firefox and navigate to:
-   ```
-   http://192.168.1.X:5000
-   ```
-4. Click **"Use Web Camera"**, grant camera access, and test the dynamic aesthetic evaluation and sharpening filters live.
-
+### Connecting from Android over local Wi-Fi
+1. Connect both the host machine (Raspberry Pi/laptop) and your Android phone to the **same Wi-Fi network**.
+2. Find the local network IP address of your host machine (e.g. `192.168.1.15`).
+3. On the Android phone browser, go to `http://192.168.1.15:5000`.
+4. Click **"Use Web Camera"** to capture and analyze image aesthetics in real time!
