@@ -568,13 +568,16 @@
         }
 
         /* ============ RESPONSIVE ============ */
-        @media (max-width: 1400px) {
+        @media (max-width: 1024px) {
+            body {
+                padding: 70px 16px 40px;
+            }
             .outer-nav-left {
                 position: relative;
                 top: 0;
                 left: 0;
                 max-width: 100%;
-                margin-bottom: 24px;
+                margin-bottom: 16px;
             }
 
             .outer-nav-center {
@@ -583,7 +586,7 @@
                 left: 0;
                 transform: none;
                 width: 100%;
-                margin-bottom: 24px;
+                margin-bottom: 16px;
             }
 
             .outer-nav-right {
@@ -592,23 +595,64 @@
                 right: 0;
                 width: 100%;
                 justify-content: center;
-                margin-bottom: 24px;
-            }
-
-            body {
-                padding-top: 40px;
-            }
-
-            .main-canvas {
-                margin-top: 0;
+                margin-bottom: 20px;
             }
         }
 
-        @media (max-width: 820px) {
+        @media (max-width: 768px) {
+            body {
+                padding: 16px 12px 32px;
+            }
+            .outer-nav-left {
+                display: none; /* Streamline mobile view by hiding heavy desktop header text */
+            }
+            .outer-nav-center {
+                width: 100%;
+                margin-bottom: 12px;
+                border-radius: 8px;
+            }
+            .outer-nav-right {
+                margin-bottom: 16px;
+            }
             .main-canvas {
                 grid-template-columns: 1fr;
-                gap: 36px;
-                padding: 40px 24px;
+                gap: 24px;
+                padding: 24px 16px;
+                border-radius: 16px;
+            }
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            .hero-subtitle {
+                font-size: 0.85rem;
+                margin-bottom: 20px;
+            }
+            .upload-zone {
+                padding: 36px 16px;
+            }
+            .upload-icon {
+                font-size: 2.2rem;
+            }
+            .btn-analyze, .btn-enhance, .btn-outline {
+                padding: 16px 20px;
+                font-size: 0.85rem;
+                min-height: 48px;
+            }
+            .mlops-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .btn-mlops {
+                padding: 14px;
+                font-size: 0.72rem;
+                width: 100%;
+            }
+            .modal-overlay {
+                padding: 16px;
+            }
+            .contact-modal {
+                padding: 28px 20px 24px;
+                width: 100%;
             }
         }
 
@@ -900,6 +944,13 @@
             if (stream) {
                 stopCamera();
             } else {
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    // Over unencrypted HTTP (http://192.168.x.x), mobile browsers block live WebRTC camera access for security.
+                    // Fall back gracefully to native Android camera picker!
+                    imageInput.setAttribute('capture', 'environment');
+                    imageInput.click();
+                    return;
+                }
                 try {
                     stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
                     webcam.srcObject = stream;
@@ -911,7 +962,9 @@
                     analyzeBtn.style.display = 'none';
                     previewWrapper.style.display = 'none';
                 } catch (err) {
-                    alert('Camera access denied or unavailable: ' + err.message);
+                    // Fallback to native camera input on permission deny
+                    imageInput.setAttribute('capture', 'environment');
+                    imageInput.click();
                 }
             }
         }

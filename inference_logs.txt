@@ -808,3 +808,103 @@ INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:49:09] "POST /enhance HTTP/1.1" 200 
 INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
 INFO:root:Successfully updated model dynamically to version v2.0.0
 INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:49:18] "POST /model/update HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:20:24] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:20:24] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:20:24] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:20:25] "GET /model/status HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.31.189:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:22:35] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:22:35] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:22:35] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:22:35] "GET /model/status HTTP/1.1" 200 -
+INFO:root:score=0.004, label=Bad Aesthetic, latency=50.11ms, model_version=v2.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:23:29] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:23:45] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:24:25] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:24:28] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:24:31] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:24:32] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:24:33] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:24:34] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:24:35] "POST /enhance HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
+INFO:root:Successfully updated model dynamically to version v2.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:24:42] "POST /model/update HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v1.0.0.tflite (v1.0.0)
+INFO:root:Successfully updated model dynamically to version v1.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:24:52] "POST /model/update HTTP/1.1" 200 -
+INFO:root:score=0.535, label=Good Aesthetic, latency=31.93ms, model_version=v1.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:25:03] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:25:06] "POST /enhance HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v1.0.0.tflite (v1.0.0)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.31.189:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:32:02] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:32:03] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:32:03] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:32:09] "GET /model/status HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:33:29] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:33:29] "GET /mridul_avatar.jpg HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:33:29] "GET /mridul.jpg HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:33:30] "GET /model/status HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.156 - - [24/Jul/2026 14:37:11] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.156 - - [24/Jul/2026 14:37:13] "GET /mridul_avatar.jpg HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.156 - - [24/Jul/2026 14:37:13] "GET /mridul.jpg HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.156 - - [24/Jul/2026 14:37:14] "GET /model/status HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.156 - - [24/Jul/2026 14:37:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:root:score=0.045, label=Bad Aesthetic, latency=40.76ms, model_version=v1.0.0
+INFO:werkzeug:192.168.31.156 - - [24/Jul/2026 14:37:47] "POST /predict HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
+INFO:root:Successfully updated model dynamically to version v2.0.0
+INFO:werkzeug:192.168.31.156 - - [24/Jul/2026 14:37:51] "POST /model/update HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:39:05] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:39:05] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:39:05] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:39:06] "GET /model/status HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.31.189:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:41:03] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:41:03] "GET /model/status HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:41:03] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:41:03] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:41:04] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:41:04] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:41:04] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:41:07] "GET /model/status HTTP/1.1" 200 -
+INFO:root:score=0.994, label=Good Aesthetic, latency=31.61ms, model_version=v2.0.0
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:41:25] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:41:35] "POST /enhance HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.31.189:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:42:55] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:42:55] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:42:55] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:42:56] "GET /model/status HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:42:58] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:42:58] "[36mGET /mridul_avatar.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:42:58] "[36mGET /mridul.jpg HTTP/1.1[0m" 304 -
+INFO:werkzeug:192.168.31.100 - - [24/Jul/2026 14:42:58] "GET /model/status HTTP/1.1" 200 -
+INFO:root:score=0.939, label=Good Aesthetic, latency=47.23ms, model_version=v2.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 14:43:11] "POST /predict HTTP/1.1" 200 -

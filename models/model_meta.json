@@ -7,14 +7,14 @@
       "accuracy": 0.85,
       "quantization": "dynamic_range",
       "size_bytes": 2667336,
-      "timestamp": "2026-07-24T08:01:25Z"
+      "timestamp": "2026-07-24T08:54:52Z"
     },
     "v2.0.0": {
       "path": ".\\models\\model_dynamic_quant_v2.0.0.tflite",
       "accuracy": 0.86,
       "quantization": "dynamic_range",
       "size_bytes": 2667336,
-      "timestamp": "2026-07-24T08:19:18Z"
+      "timestamp": "2026-07-24T09:07:51Z"
     }
   }
 }
