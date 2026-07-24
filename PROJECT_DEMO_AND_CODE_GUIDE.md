@@ -1,6 +1,6 @@
 # Aesthetic Intelligence Engine (Æ) - Live Demo & Code Mapping Guide
 
-This document provides a presentation guide to showcase the **Aesthetic Intelligence Engine** to your mentor, with explicit Q&A code locations for all major features (Webcam, Upload Photo, Real-time Scoring, Image Enhancement, and Deployment options).
+This document provides a presentation guide to showcase the **Aesthetic Intelligence Engine** to your mentor, with explicit Q&A code locations for all major features (Webcam, Upload Photo, Real-time Scoring, Image Enhancement, and Deployment options) and a technical breakdown of tasks, techniques, and term definitions.
 
 ---
 
@@ -117,3 +117,62 @@ If your mentor asks where specific core features are coded in the project, refer
 | **6** | **Quantized Model** | MobileNetV2 2.54MB dynamic range quantized TFLite binary | [`models/model_dynamic_quant.tflite`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/models/model_dynamic_quant.tflite) & [`notebooks/phase1_training.ipynb`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/notebooks/phase1_training.ipynb) |
 | **7** | **Edge Dual Engine** | `tensorflow` ⇄ `tflite_runtime` dynamic wheel import | [`app.py:L13-L25`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L13-L25) & [`deploy_raspberry_pi.sh`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/deploy_raspberry_pi.sh) |
 | **8** | **Deployments** | Local Wi-Fi, Raspberry Pi, Docker, Vercel Serverless | [`app.py:L29-L51`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L29-L51), [`Dockerfile`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/Dockerfile), [`vercel.json`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/vercel.json) |
+
+---
+
+## Part 4: Task-to-Technique Mapping & Glossary of Technical Terms
+
+This section explains **what you were asked to do**, **what technique you used**, **how it works**, and **definitions of key technical terms** to impress your mentor.
+
+---
+
+### Task 1: Model Compression & Edge Optimization
+* **What you were asked to do**: Make a heavy neural network run fast (< 5ms) on low-power devices without needing expensive GPU servers.
+* **Technique Used**: **Dynamic Range Quantization** on a **MobileNetV2** base architecture.
+* **How it works**: Pre-trained MobileNetV2 weights are compressed from 32-bit floating point (`float32`) to 8-bit integers (`int8`) post-training. This reduces file size from 10MB+ down to **2.54 MB** (75% savings) while preserving over 99% accuracy.
+
+---
+
+### Task 2: Edge Hardware Compatibility
+* **What you were asked to do**: Run inference on micro-hardware (like Raspberry Pi) where installing a full 500MB+ TensorFlow package is too heavy or unsupported.
+* **Technique Used**: **Dual-Engine Wheel Fallback (`tensorflow` ⇄ `tflite_runtime`)**.
+* **How it works**: `app.py` attempts to import `tensorflow`. If missing (as on a Raspberry Pi), it gracefully falls back to `tflite_runtime`—a lightweight 15MB wheel package containing only the TFLite interpreter engine.
+
+---
+
+### Task 3: Live Image Capture & Client-Side Preprocessing
+* **What you were asked to do**: Allow users to analyze images from their webcam or file uploads directly in the browser.
+* **Technique Used**: **HTML5 MediaDevices API & Off-Screen Canvas Blob Encoding**.
+* **How it works**: Browser accesses camera stream via `navigator.mediaDevices.getUserMedia`, draws video frames onto an off-screen `<canvas>`, converts pixels into a JPEG `Blob`, and streams binary data to Flask via asynchronous `fetch()` requests.
+
+---
+
+### Task 4: Automated Image Aesthetic Enhancement
+* **What you were asked to do**: Automatically improve the visual quality and aesthetic score of poor, dark, or blurry photos.
+* **Technique Used**: **YCrCb Color-Space CLAHE & 2D Spatial Sharpening Convolution**.
+* **How it works**:
+  1. Image is converted to **YCrCb** color space so contrast enhancement only affects lightness (Y channel) without distorting natural colors.
+  2. **CLAHE** adjusts local histogram contrast across image tiles.
+  3. A **2D Convolutional Sharpening Kernel** (`[[0,-1,0],[-1,5,-1],[0,-1,0]]`) amplifies high-frequency edge details.
+
+---
+
+### Task 5: Zero-Downtime Model Hot-Swapping
+* **What you were asked to do**: Update or rollback active production AI models live without restarting the server.
+* **Technique Used**: **Atomic Thread-Locked Interpreter Allocation (`threading.Lock()`)**.
+* **How it works**: When `/model/update` receives a request, it validates and allocates tensors for the new model file inside a thread lock, then atomically replaces the active `InterpreterClass` instance in memory.
+
+---
+
+### 💡 Technical Terms & Definitions Glossary
+
+1. **Edge AI / On-Device Inference**: Running machine learning models locally on physical hardware (laptops, phones, Raspberry Pi) rather than sending data to cloud API servers. Guarantees zero network latency and complete user data privacy.
+2. **Dynamic Range Quantization**: A post-training quantization method that compresses model weight values from 32-bit floats to 8-bit integers, drastically shrinking model size and reducing CPU memory bandwidth demands.
+3. **MobileNetV2**: An efficient convolutional neural network (CNN) architecture optimized specifically for mobile and embedded vision applications using depthwise separable convolutions.
+4. **TFLite (TensorFlow Lite)**: Google's lightweight, open-source cross-platform framework for deploying ML models on mobile and edge devices.
+5. **CLAHE (Contrast Limited Adaptive Histogram Equalization)**: A computer vision algorithm that enhances local contrast in small image regions (tiles) while preventing noise over-amplification.
+6. **YCrCb Color Space**: A color model separating Luminance/Brightness ($Y$) from Chrominance/Color ($Cr$, $Cb$), ideal for processing light and contrast without altering true colors.
+7. **2D Convolutional Kernel**: A small matrix (e.g. 3x3) slid over image pixels to perform mathematical transformations such as edge sharpening, blurring, or feature detection.
+8. **Thread Lock (`threading.Lock`)**: A software synchronization primitive that prevents multiple server threads from simultaneously modifying or reading shared resources, ensuring thread safety and zero crash bugs.
+9. **Base64 Encoding**: A binary-to-text encoding scheme that formats raw image byte buffers into text strings suitable for immediate rendering inside HTML `<img>` elements.
+10. **Serverless Architecture (Vercel)**: A cloud computing execution model where application containers run dynamically on-demand with read-only file systems, requiring write operations to be redirected to `/tmp`.
