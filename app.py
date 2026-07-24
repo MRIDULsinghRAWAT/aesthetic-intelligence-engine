@@ -10,7 +10,7 @@ import urllib.request
 import shutil
 import webbrowser
 
-# Try to import TensorFlow, fallback to tflite_runtime for edge deployment
+# Try to import TensorFlow, fallback to tflite_runtime or ai_edge_litert for edge & cloud deployment
 try:
     import tensorflow as tf  # type: ignore
     InterpreterClass = tf.lite.Interpreter
@@ -21,14 +21,21 @@ except ImportError:
         InterpreterClass = tflite.Interpreter
         logging.info("Using tflite_runtime for TFLite Interpreter.")
     except ImportError:
-        logging.critical("Neither 'tensorflow' nor 'tflite_runtime' packages could be found.")
-        raise ImportError("Please install either 'tensorflow' or 'tflite_runtime' to run inference.")
+        try:
+            import ai_edge_litert.interpreter as tflite  # type: ignore
+            InterpreterClass = tflite.Interpreter
+            logging.info("Using ai_edge_litert for TFLite Interpreter.")
+        except ImportError:
+            logging.critical("Neither 'tensorflow', 'tflite_runtime', nor 'ai_edge_litert' packages could be found.")
+            raise ImportError("Please install 'ai-edge-litert' or 'tflite-runtime' to run inference.")
 
-app = Flask(__name__)
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app = Flask(__name__, template_folder=os.path.join(APP_DIR, "templates"))
 
 # Detect if running in Vercel environment
 IS_VERCEL = os.environ.get("VERCEL") == "1"
-BASE_DIR = "/tmp" if IS_VERCEL else "."
+BASE_DIR = "/tmp" if IS_VERCEL else APP_DIR
 
 # Setup logging path dynamically
 log_file = os.path.join(BASE_DIR, "inference_logs.txt")
@@ -38,10 +45,13 @@ logging.basicConfig(filename=log_file, level=logging.INFO, force=True)
 if IS_VERCEL:
     os.makedirs(os.path.join(BASE_DIR, "models"), exist_ok=True)
     for fname in ["model_meta.json", "model_dynamic_quant.tflite", "model_dynamic_quant_v1.0.0.tflite", "model_dynamic_quant_v2.0.0.tflite"]:
-        src_path = os.path.join("models", fname)
+        src_path = os.path.join(APP_DIR, "models", fname)
         dest_path = os.path.join(BASE_DIR, "models", fname)
         if os.path.exists(src_path) and not os.path.exists(dest_path):
-            shutil.copy(src_path, dest_path)
+            try:
+                shutil.copy(src_path, dest_path)
+            except Exception as e:
+                logging.error(f"Error copying {fname}: {e}")
             
     # Set MLflow tracking URI to writable /tmp database
     try:
@@ -67,7 +77,7 @@ def load_model_meta():
     except Exception as e:
         logging.error(f"Error loading model_meta.json: {e}")
         # Fallback to local copy if read failed
-        fallback_path = "models/model_meta.json"
+        fallback_path = os.path.join(APP_DIR, "models", "model_meta.json")
         if os.path.exists(fallback_path):
             try:
                 with open(fallback_path, "r") as f:
@@ -93,6 +103,8 @@ def init_interpreter(model_path, version):
     # Ensure correct base path prefix on Vercel if database stored a relative dot path
     if IS_VERCEL and model_path.startswith("models/"):
         model_path = os.path.join(BASE_DIR, model_path)
+    elif not os.path.isabs(model_path):
+        model_path = os.path.join(APP_DIR, model_path)
         
     logging.info(f"Initializing TFLite Interpreter for model: {model_path} ({version})")
     
@@ -107,8 +119,11 @@ def init_interpreter(model_path, version):
         current_model_path = model_path
 
 # Initial load on start up
-meta_data = load_model_meta()
-init_interpreter(meta_data["active_model_path"], meta_data["active_version"])
+try:
+    meta_data = load_model_meta()
+    init_interpreter(meta_data["active_model_path"], meta_data["active_version"])
+except Exception as e:
+    logging.error(f"Startup model load error: {e}")
 
 
 @app.route("/")
@@ -117,11 +132,11 @@ def home():
 
 @app.route("/mridul.jpg")
 def mridul_img():
-    return send_file("mridul.jpg")
+    return send_file(os.path.join(APP_DIR, "mridul.jpg"))
 
 @app.route("/mridul_avatar.jpg")
 def mridul_avatar():
-    return send_file("mridul_avatar.jpg")
+    return send_file(os.path.join(APP_DIR, "mridul_avatar.jpg"))
 
 @app.route("/model/status", methods=["GET"])
 def model_status():
