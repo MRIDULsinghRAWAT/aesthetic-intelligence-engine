@@ -1,6 +1,6 @@
 # Aesthetic Intelligence Engine (Æ) - Live Demo & Code Mapping Guide
 
-This document provides a streamlined presentation guide to showcase the **Aesthetic Intelligence Engine** to your mentor, followed by a complete mapping of all major features to their exact file and line-level implementation details in the codebase.
+This document provides a presentation guide to showcase the **Aesthetic Intelligence Engine** to your mentor, with explicit Q&A code locations for all major features (Webcam, Upload Photo, Real-time Scoring, Image Enhancement, and Deployment options).
 
 ---
 
@@ -25,9 +25,9 @@ python app.py
 
 ### 3. Step-by-Step Live Demo Flow
 
-#### Step 1: Real-Time Image Aesthetic Evaluation
+#### Step 1: Add Photo & Real-Time Aesthetic Evaluation
 1. Go to `http://localhost:5000`.
-2. Drag and drop any image (e.g. `test_image.jpg` or `mridul.jpg`) or select one.
+2. Drag and drop any image (e.g. `test_image.jpg` or `mridul.jpg`) or click the dropzone to pick a photo.
 3. Click **"Analyze Aesthetic"**.
 4. **Point out to your mentor**:
    - **Score**: Numerical aesthetic score from `0.00` to `1.00`.
@@ -56,31 +56,64 @@ python app.py
 
 ---
 
-## Part 2: Important Features & Code Implementation Mapping
+## Part 2: Mentor Quick Answers - "Where is this code implemented?"
 
-Below is the architectural mapping showing where every key feature is implemented in the codebase.
+If your mentor asks where specific core features are coded in the project, reference these exact code blocks:
 
-| # | Feature Name | Description | Key Code Files & Line Numbers |
-|---|---|---|---|
-| **1** | **Dynamic Range Quantized TFLite Model** | Compressed MobileNetV2 regression model from 10MB+ down to **2.54MB** (75% savings) with sub-5ms CPU latency. | • Model Binary: [`models/model_dynamic_quant.tflite`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/models/model_dynamic_quant.tflite)<br>• Training Notebook: [`notebooks/phase1_training.ipynb`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/notebooks/phase1_training.ipynb) |
-| **2** | **Dual-Engine Edge Fallback** | Fallback system importing full `tensorflow` or lightweight `tflite_runtime` (15MB wheel for Raspberry Pi / micro-controllers). | • Implementation: [`app.py:L13-L25`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L13-L25)<br>• Edge Script: [`deploy_raspberry_pi.sh:L40-L55`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/deploy_raspberry_pi.sh) |
-| **3** | **Thread-Safe Model Interpreter Manager** | Global `threading.Lock()` and interpreter state loader preventing concurrency issues when executing TFLite tensor allocations. | • Initializer & Locks: [`app.py:L54-L111`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L54-L111) |
-| **4** | **Live Hot-Swapping & Model Rollback** | Dynamic `POST /model/update` endpoint that downloads or copies new TFLite versions and re-initializes `InterpreterClass` on the fly. | • Backend Endpoint: [`app.py:L136-L211`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L136-L211)<br>• Status Endpoint: [`app.py:L126-L134`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L126-L134)<br>• UI Controller Card: [`templates/index.html:L815-L836`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L815-L836)<br>• JS Update Handler: [`templates/index.html:L1087-L1138`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L1087-L1138) |
-| **5** | **Computer Vision Image Auto-Enhancement** | OpenCV YCrCb-space CLAHE contrast tuning + 2D sharpening kernel filter (`POST /enhance`), returning Base64 image and improved score. | • Backend Logic: [`app.py:L250-L303`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L250-L303)<br>• JS Enhance Handler: [`templates/index.html:L1014-L1054`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L1014-L1054) |
-| **6** | **Real-Time Aesthetic Scoring Pipeline** | OpenCV image decoder, `(128,128,3)` standardizer, TFLite tensor invoker, and JSON latency responder (`POST /predict`). | • Backend Logic: [`app.py:L213-L249`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L213-L249)<br>• JS Predict Handler: [`templates/index.html:L975-L1012`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L975-L1012) |
-| **7** | **Vercel Serverless Read-Only Filesystem Adaptor** | Dynamic detection of `VERCEL=1` redirecting database writes, logs, and TFLite model downloads to the writable `/tmp` directory. | • Environment Handler: [`app.py:L29-L51`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L29-L51)<br>• Vercel Entrypoint: [`api/index.py:L1-L2`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/api/index.py#L1-L2)<br>• Vercel Config: [`vercel.json:L1-L7`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/vercel.json#L1-L7) |
-| **8** | **Responsive Glassmorphic UI Dashboard** | Swiss-style responsive HTML5/CSS3 single-page dashboard with SVG metrics visualization and live feedback. | • Markup & CSS: [`templates/index.html:L1-L843`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L1-L843) |
-| **9** | **HTML5 Webcam Frame Capture** | `navigator.mediaDevices.getUserMedia` video stream capture to hidden canvas element and Blob conversion. | • Video Element: [`templates/index.html:L768`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L768)<br>• JS Camera Stream Handler: [`templates/index.html:L899-L962`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L899-L962) |
+### ❓ Question 1: "Where is the Add Photo / Upload Image feature implemented?"
+* **Frontend Upload Zone & Preview**: [`templates/index.html:L762-L775`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L762-L775)
+* **Drag & Drop + File Selection JavaScript Handlers**: [`templates/index.html:L882-L897`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L882-L897) & [`templates/index.html:L964-L973`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L964-L973)
+* **How it works**: Uses HTML5 File API and drag-and-drop listeners to read user images into memory, display an instant preview, and prepare a `FormData` payload.
 
 ---
 
-## Part 3: Deployment Options Summary
+### ❓ Question 2: "Where is the Web Camera (Live Capture) feature implemented?"
+* **HTML Video Stream Element & Camera Button**: [`templates/index.html:L768-L771`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L768-L771)
+* **JavaScript Camera Stream & Frame Capture Engine**: [`templates/index.html:L899-L962`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L899-L962)
+* **How it works**: Uses `navigator.mediaDevices.getUserMedia({ video: true })` to capture the webcam stream, draws frames onto an off-screen `<canvas>` element, converts the canvas to a JPEG `Blob`, and sends it to the scoring backend.
 
-1. **Local Desktop / Laptop**:
-   `python app.py` (Runs on `http://localhost:5000`)
-2. **Raspberry Pi OS**:
-   `./deploy_raspberry_pi.sh` then `python app.py`
-3. **Docker Container**:
-   `docker build -t aesthetic-intelligence-engine .` && `docker run -p 5000:5000 aesthetic-intelligence-engine`
-4. **Vercel Serverless**:
-   `vercel --prod`
+---
+
+### ❓ Question 3: "Where is the Real-Time Analysis / Scoring feature implemented?"
+* **Backend Flask Prediction API (`POST /predict`)**: [`app.py:L213-L249`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L213-L249)
+* **Frontend Async Prediction Handler**: [`templates/index.html:L975-L1012`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L975-L1012)
+* **How it works**: Backend decodes image bytes with OpenCV `cv2.imdecode`, resizes to `128x128`, normalizes pixel values (`/ 255.0`), feeds input into TFLite interpreter using thread locks, measures latency with high-precision timestamps, and returns score and execution time in `< 5ms`.
+
+---
+
+### ❓ Question 4: "Where is the Auto-Enhance feature implemented?"
+* **Backend OpenCV Image Enhancement Pipeline (`POST /enhance`)**: [`app.py:L250-L303`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L250-L303)
+* **Frontend Auto-Enhance Button & Base64 Image Render**: [`templates/index.html:L286-L305`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L286-L305) & [`templates/index.html:L1014-L1054`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L1014-L1054)
+* **How it works**:
+  1. Converts RGB/BGR image into **YCrCb color space**.
+  2. Applies **CLAHE** (Contrast Limited Adaptive Histogram Equalization) on the luminance (Y) channel with `clipLimit=3.0` and `tileGridSize=(8,8)`.
+  3. Applies a **2D Sharpening Kernel Filter** (`[[0,-1,0],[-1,5,-1],[0,-1,0]]`) using `cv2.filter2D`.
+  4. Runs the enhanced image back through the TFLite model and returns Base64 PNG data along with the improved score.
+
+---
+
+### ❓ Question 5: "Where are the Deployment options implemented?"
+* **Local Network Broadcasting (Mobile Phone on Wi-Fi)**:
+  * Server setup: [`app.py:L313`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L313) (`app.run(host="0.0.0.0", port=5000)`)
+* **Raspberry Pi OS Native Setup**:
+  * Edge Installer Script: [`deploy_raspberry_pi.sh`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/deploy_raspberry_pi.sh) (installs system libraries and lightweight `tflite-runtime`)
+* **Docker Containerization**:
+  * Container configuration: [`Dockerfile`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/Dockerfile)
+* **Vercel Cloud Serverless Deployment**:
+  * Environment Handler & `/tmp` dynamic write rerouting: [`app.py:L29-L51`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L29-L51)
+  * Serverless Config & Entrypoint: [`vercel.json`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/vercel.json) & [`api/index.py`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/api/index.py)
+
+---
+
+## Part 3: Complete Feature Summary Table
+
+| # | Feature | Description | Key File & Line Range |
+|---|---|---|---|
+| **1** | **Add Photo / Upload** | Drag-and-drop & file picker browser input | [`templates/index.html:L762-L775`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L762-L775) & [`L882-L897`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L882-L897) |
+| **2** | **Web Camera Capture** | Live webcam streaming & canvas Blob capture | [`templates/index.html:L768`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L768) & [`L899-L962`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L899-L962) |
+| **3** | **Real-Time Analysis** | Sub-5ms TFLite model scoring API (`POST /predict`) | [`app.py:L213-L249`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L213-L249) & [`templates/index.html:L975-L1012`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L975-L1012) |
+| **4** | **Auto-Enhance Image** | YCrCb CLAHE + 2D Sharpening filter (`POST /enhance`) | [`app.py:L250-L303`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L250-L303) & [`templates/index.html:L1014-L1054`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L1014-L1054) |
+| **5** | **Live Hot-Swapping** | Thread-safe interpreter re-allocation (`v1` ⇄ `v2`) | [`app.py:L136-L211`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L136-L211) & [`templates/index.html:L1087-L1138`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/templates/index.html#L1087-L1138) |
+| **6** | **Quantized Model** | MobileNetV2 2.54MB dynamic range quantized TFLite binary | [`models/model_dynamic_quant.tflite`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/models/model_dynamic_quant.tflite) & [`notebooks/phase1_training.ipynb`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/notebooks/phase1_training.ipynb) |
+| **7** | **Edge Dual Engine** | `tensorflow` ⇄ `tflite_runtime` dynamic wheel import | [`app.py:L13-L25`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L13-L25) & [`deploy_raspberry_pi.sh`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/deploy_raspberry_pi.sh) |
+| **8** | **Deployments** | Local Wi-Fi, Raspberry Pi, Docker, Vercel Serverless | [`app.py:L29-L51`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/app.py#L29-L51), [`Dockerfile`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/Dockerfile), [`vercel.json`](file:///c:/Users/Mridul/Desktop/aesthetic-intelligence-engine/vercel.json) |
