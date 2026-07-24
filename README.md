@@ -1,188 +1,156 @@
 # Aesthetic Intelligence Engine (Æ)
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel%20Production-success?logo=vercel&logoColor=white)](https://aesthetic-intelligence-engine.vercel.app)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://python.org)
-[![ML Framework](https://img.shields.io/badge/ML%20Framework-TensorFlow%20%2F%20TFLite-orange?logo=tensorflow&logoColor=white)](https://tensorflow.org)
+[![ML Framework](https://img.shields.io/badge/ML%20Framework-TensorFlow%20%2F%20TFLite%20%2F%20LiteRT-orange?logo=tensorflow&logoColor=white)](https://tensorflow.org)
 [![Backend](https://img.shields.io/badge/Backend-Flask-lightgrey?logo=flask&logoColor=white)](https://flask.palletsprojects.com)
 [![OpenCV](https://img.shields.io/badge/CV-OpenCV-green?logo=opencv&logoColor=white)](https://opencv.org)
-[![MLOps](https://img.shields.io/badge/MLOps-MLflow-blueviolet?logo=mlflow&logoColor=white)](https://mlflow.org)
 [![Docker](https://img.shields.io/badge/Container-Docker-blue?logo=docker&logoColor=white)](https://docker.com)
 
-An on-device **Edge AI pipeline** that evaluates, scores, and enhances image aesthetics in real time. Powered by an optimized, dynamically quantized **TensorFlow Lite** model running locally to guarantee sub-5ms scoring, zero network overhead, and absolute privacy. Equipped with a **live MLOps hot-swapping controller** and full telemetry tracking using **MLflow**.
+An on-device **Edge AI pipeline** that evaluates, scores, and enhances image aesthetics in real time. Powered by an optimized, dynamically quantized **TensorFlow Lite (LiteRT)** model running locally to guarantee **sub-5ms scoring**, zero network overhead, and absolute privacy. Equipped with a **live model hot-swapping controller** and server-side **computer vision auto-enhancement**.
+
+🚀 **Live Production Application**: [https://aesthetic-intelligence-engine.vercel.app](https://aesthetic-intelligence-engine.vercel.app)
 
 ---
 
 ## 1. Project Overview
 
-The **Aesthetic Intelligence Engine** is designed to analyze image aesthetic quality directly on edge devices (like Raspberry Pi) and mobile nodes (Android). 
+The **Aesthetic Intelligence Engine** is designed to analyze image aesthetic quality directly on edge devices (like Raspberry Pi), mobile hardware (Android), and cloud serverless platforms (Vercel).
 
-By leveraging **transfer learning** on MobileNetV2 and applying **Dynamic Range Quantization**, the neural network is compressed from over 10 MB to **2.54 MB** (a 75% reduction), achieving **sub-5ms CPU inference**. 
+By leveraging **transfer learning** on MobileNetV2 and applying **Dynamic Range Quantization**, the neural network is compressed from over 10 MB to **2.54 MB** (a 75% reduction), achieving **sub-5ms CPU inference**.
 
-The system features:
-- A responsive, glassmorphic Swiss-style single-page dashboard.
-- Live camera snapshots and canvas pre-processing.
-- Server-side image enhancement (CLAHE contrast adjustments and a 2D sharpening kernel) via OpenCV.
-- A thread-safe dynamic model registry and re-allocator to swap active interpreters on the fly.
-- Telemetry logging for prediction latency, scores, and model versions to a local MLflow registry.
+### Key System Highlights:
+- **Responsive Single-Page Dashboard**: Swiss-style glassmorphic design optimized for both desktop and mobile screens.
+- **Webcam & Camera Integration**: Real-time live camera capture via WebRTC / native device camera picker.
+- **Computer Vision Auto-Enhancement**: Server-side image enhancement (YCrCb-space CLAHE contrast tuning & 2D sharpening kernel filter) via OpenCV.
+- **Live MLOps Hot-Swapping**: Thread-safe dynamic model registry and re-allocator to swap active interpreters (`v1.0.0` ⇄ `v2.0.0`) on the fly without server restart.
+- **Multi-Environment Support**: Auto-detects local host, Raspberry Pi OS, Docker containers, and Vercel serverless read-only environments.
 
 ---
 
-## 2. Live Demo & Interface
+## 2. Interface & Live Screenshots
 
-| Dynamic Model Swapping & Rollbacks | Low Aesthetic Detection & Camera Snap |
+| Live Model Hot-Swapping | Responsive Mobile & Camera Capture |
 | :---: | :---: |
 | ![MLOps Dynamic Updates](reports/phase3_mlops_demo.webp) | ![Webcam Capture Mode](docs/web_app_screenshot_2.png) |
 
 ---
 
-## 3. Core MLOps Features
-
-- **On-Device Inference**: Locally loaded TFLite models analyze inputs without any cloud round-trips.
-- **Webcam Integration**: Capture and process live images directly from the browser.
-- **Image Enhancement & Effects**: Auto-enhance low-contrast or noisy images using YCrCb-space CLAHE and edge sharpening filters to boost aesthetic scores.
-- **MLOps Model Controller**: Instantly **hot-swap** or **roll back** active production models (e.g., v1.0.0 ⇄ v2.0.0) from the UI without restarting the Flask server.
-- **Dual-Engine Edge Fallback**: Backend dynamically imports `tensorflow` or `tflite_runtime` (lightweight 15MB wheel for Raspberry Pi / micro-controllers).
-- **MLflow Telemetry**: Logs latency, scores, parameters, and model versions into a local SQLite store (`mlflow.db`).
-
----
-
-## 4. System Architecture
-
-The following diagram illustrates the local image capture flow, preprocessing filters, thread-locked interpreter invocation, and MLflow logging:
+## 3. Architecture & Core Features
 
 ```
 [User / Browser Client] 
        │
-       ▼ (Upload File / Webcam Snap / Live Reload Trigger)
-[Flask Web Server (app.py)] ───► [OpenCV Preprocessing (CLAHE / 2D Sharpening)]
+       ▼ (Upload Photo / Web Camera Snap / Live Model Hot-Swap)
+[Flask Web Server (app.py)] ───► [OpenCV Preprocessing (YCrCb CLAHE / 2D Sharpening)]
        │                                            │
-       ├─► (Returns active version/meta)            ▼ (Invoke Interpreter lock)
-       ├─► [MLflow Logger] ──► [mlflow.db]      [TFLite Interpreter Class]
+       ├─► (Returns active version/meta)            ▼ (Invoke Thread-Locked Interpreter)
+       │                                        [TFLite Interpreter Class]
        │                                            ▲
-       ▼ (Returns score, latency & base64 image)    │ (Reloads versioned file)
+       ▼ (Returns score, latency & base64 image)    │ (Reloads versioned binary)
 [User / Browser Client] ◄─────────────────────── [model_dynamic_quant_vX.tflite]
 ```
 
-Here is the high-resolution system architecture schema:
-
 ![System Architecture Schema](docs/architecture_diagram.png)
 
----
-
-## 5. API Reference
-
-### 1. Model Status
-- **Endpoint**: `GET /model/status`
-- **Description**: Returns active model version, path, and registered available versions.
-- **Response**:
-  ```json
-  {
-    "status": "success",
-    "active_version": "v1.0.0",
-    "active_model_path": "models/model_dynamic_quant.tflite",
-    "available_versions": { ... }
-  }
-  ```
-
-### 2. Model Live Update (Hot-swap)
-- **Endpoint**: `POST /model/update`
-- **Description**: Dynamically re-allocates the TFLite Interpreter to a new model version. Supports URL downloads or simulated upgrades.
-- **Request Body**:
-  ```json
-  {
-    "version": "v2.0.0",
-    "url": "https://example.com/models/v2.tflite" (Optional)
-  }
-  ```
-
-### 3. Predict Aesthetic Score
-- **Endpoint**: `POST /predict`
-- **Body**: multipart/form-data (`image`: File)
-- **Description**: Evaluates image and returns score (0.0 to 1.0) and model version used.
-
-### 4. Enhance Image
-- **Endpoint**: `POST /enhance`
-- **Body**: multipart/form-data (`image`: File)
-- **Description**: Runs OpenCV local contrast tuning and detail-sharpening, returns the enhanced base64 image and its improved aesthetic score.
+- **On-Device Inference**: Locally loaded TFLite models analyze inputs without any cloud API dependencies.
+- **Webcam Integration**: Stream and process live images directly from mobile/desktop browser cameras.
+- **Image Enhancement**: Auto-enhance low-contrast or noisy images using YCrCb-space CLAHE and 2D sharpening filters to boost aesthetic scores.
+- **Live Hot-Swapping**: Dynamically re-allocate active production models (`v1.0.0` ⇄ `v2.0.0`) from the UI without restarting `app.py`.
+- **Edge & Cloud Engine Fallback**: Backend dynamically imports `tensorflow`, `tflite_runtime`, or `ai_edge_litert` (lightweight wheels under 15MB for Raspberry Pi & Vercel serverless).
 
 ---
 
-## 6. Model Training & Optimization Achievements
+## 4. API Reference
 
-### Model Parameters & Training Strategy
-- **Base Extractor**: MobileNetV2 (ImageNet pre-trained weights) constrained to `(128, 128, 3)` input shapes.
-- **Custom Regression Top**: Replaced standard classification layer with Global Average Pooling, 128 Dense nodes (ReLU), and a single Sigmoid node representing aesthetic value ($[0.0, 1.0]$).
-- **Optimizer**: Adam with Binary Crossentropy loss, trained over 10 epochs.
+### 1. Predict Aesthetic Score
+* **Endpoint**: `POST /predict`
+* **Body**: `multipart/form-data` (`image`: File)
+* **Response**:
+  ```json
+  {
+    "score": 0.842,
+    "label": "Good Aesthetic",
+    "latency_ms": 4.12,
+    "model_version": "v1.0.0"
+  }
+  ```
 
-### Quantization Benchmarks
+### 2. Auto-Enhance Image
+* **Endpoint**: `POST /enhance`
+* **Body**: `multipart/form-data` (`image`: File)
+* **Response**: Returns enhanced base64 PNG data, newly calculated score, and latency.
+
+### 3. Model Status
+* **Endpoint**: `GET /model/status`
+* **Response**: Returns active version, active model path, and registered available versions.
+
+### 4. Dynamic Model Update (Hot-Swap)
+* **Endpoint**: `POST /model/update`
+* **Body**: `{"version": "v2.0.0"}`
+* **Response**: Re-allocates TFLite interpreter atomically under thread safety locks.
+
+---
+
+## 5. Model Quantization Benchmarks
 
 | Metric | Baseline Float32 Model | Dynamic Range Quantized Model |
 | :--- | :--- | :--- |
-| **File Size** | ~10 MB+ | **2.54 MB** (75% savings) |
+| **File Size** | ~10.2 MB | **2.54 MB** (75% savings) |
 | **Precision** | 32-bit Floating Point | 8-bit Integer (quantized weights) |
-| **Inference Latency** | ~15ms - 20ms | **Sub-5ms** (4x speedup) |
+| **CPU Latency** | ~15ms - 20ms | **Sub-5ms** (4x speedup) |
 | **Accuracy Loss** | Reference Base | Negligible ($\le 1\%$ deviation) |
 
 ---
 
-## 7. Getting Started (Local Development)
+## 6. Getting Started & Local Development
 
-### Setup dependencies
+### 1. Clone & Install Dependencies
 ```bash
-pip install flask numpy opencv-python mlflow tensorflow
+git clone https://github.com/MRIDULsinghRAWAT/aesthetic-intelligence-engine.git
+cd aesthetic-intelligence-engine
+pip install flask numpy opencv-python tensorflow
 ```
 
-### Start the application
-1. Run the server:
-   ```bash
-   python app.py
-   ```
-2. Open your web browser and navigate to `http://localhost:5000`.
-3. In a separate terminal, launch the MLflow UI Dashboard to view logged telemetry:
-   ```bash
-   mlflow ui --backend-store-uri sqlite:///mlflow.db
-   ```
-   Open `http://localhost:5001` or the port shown in your terminal.
+### 2. Start Application
+```bash
+python app.py
+```
+Open your browser at `http://localhost:5000`.
 
 ---
 
-## 8. Edge & Mobile Deployment (Raspberry Pi & Android)
+## 7. Deployment Guide
 
-### Option A: Raspberry Pi OS Native Setup
-1. Transfer the workspace files and run the edge installer:
-   ```bash
-   chmod +x deploy_raspberry_pi.sh
-   ./deploy_raspberry_pi.sh
-   ```
-   *Note: This script automatically installs OpenCV system libraries and configures `tflite-runtime` instead of full TensorFlow, saving ~500MB storage space.*
-2. Start the server (binds to `0.0.0.0` for local network broadcasting):
-   ```bash
-   source .venv/bin/activate
-   python app.py
-   ```
+### Option A: Vercel Cloud Production (Instant HTTPS)
+Live URL: [https://aesthetic-intelligence-engine.vercel.app](https://aesthetic-intelligence-engine.vercel.app)
+```bash
+npx vercel --prod
+```
+*Note: Configured with `ai-edge-litert` (LiteRT) to keep total serverless bundle size under 300MB.*
 
-### Option B: Docker Containerized Setup
-1. Build the Docker image:
-   ```bash
-   docker build -t aesthetic-intelligence-engine .
-   ```
-2. Run the container:
-   ```bash
-   docker run -p 5000:5000 aesthetic-intelligence-engine
-   ```
+### Option B: Local Network Mobile Testing (Wi-Fi)
+1. Run `python app.py` on your laptop.
+2. Connect your mobile phone to the same Wi-Fi.
+3. Open `http://<YOUR_LAPTOP_IP>:5000` in your phone browser.
 
-### Option C: Vercel Serverless Cloud Deployment
-1. Install Vercel CLI:
-   ```bash
-   npm install -g vercel
-   ```
-2. Deploy directly:
-   ```bash
-   vercel --prod
-   ```
-   *Note: Our application automatically detects the Vercel cloud environment (`VERCEL=1` variable) and redirects dynamic writes (model downloads, logs, MLflow SQLite telemetry) to `/tmp/` to bypass the serverless read-only filesystem restriction. Dependencies are automatically kept under 50MB by utilizing `tflite-runtime` instead of full TensorFlow.*
+### Option C: Raspberry Pi OS Native Deployment
+```bash
+chmod +x deploy_raspberry_pi.sh
+./deploy_raspberry_pi.sh
+source .venv/bin/activate
+python app.py
+```
 
-### Connecting from Android over local Wi-Fi
-1. Connect both the host machine (Raspberry Pi/laptop) and your Android phone to the **same Wi-Fi network**.
-2. Find the local network IP address of your host machine (e.g. `192.168.1.15`).
-3. On the Android phone browser, go to `http://192.168.1.15:5000` (or your Vercel deployment URL).
-4. Click **"Use Web Camera"** to capture and analyze image aesthetics in real time!
+### Option D: Docker Container Setup
+```bash
+docker build -t aesthetic-intelligence-engine .
+docker run -p 5000:5000 aesthetic-intelligence-engine
+```
+
+---
+
+## 8. Presentation & Technical Documentation
+
+For a step-by-step mentor presentation script and line-by-line code mapping, refer to:
+* **[PROJECT_DEMO_AND_CODE_GUIDE.md](PROJECT_DEMO_AND_CODE_GUIDE.md)**: Mentor presentation script, Q&A code locations, and technical term definitions.
