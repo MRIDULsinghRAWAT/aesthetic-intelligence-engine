@@ -8,6 +8,7 @@ import os
 import threading
 import urllib.request
 import shutil
+import webbrowser
 
 # Try to import TensorFlow, fallback to tflite_runtime for edge deployment
 try:
@@ -302,5 +303,11 @@ def enhance():
     })
 
 if __name__ == "__main__":
-    print("Server starting at http://0.0.0.0:5000")
+    url = "http://127.0.0.1:5000"
+    print(f"\n🚀 Server starting at {url}")
+    print("Opening browser automatically...\n")
+    
+    # Auto-open browser in a separate thread so Flask can start listening
+    threading.Timer(1.2, lambda: webbrowser.open(url)).start()
+    
     app.run(host="0.0.0.0", port=5000, use_reloader=False)

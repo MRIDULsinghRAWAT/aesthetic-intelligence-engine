@@ -714,3 +714,77 @@ INFO:root:Initializing TFLite Interpreter for model: models\model_dynamic_quant_
 INFO:root:Successfully updated model dynamically to version v1.0.0
 INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 21:55:17] "POST /model/update HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 21:55:23] "POST /enhance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 22:31:55] "GET /model/status HTTP/1.1" 200 -
+INFO:root:score=0.973, label=Good Aesthetic, latency=193.02ms, model_version=v1.0.0
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 22:31:56] "POST /predict HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
+INFO:root:Successfully updated model dynamically to version v2.0.0
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 22:31:57] "POST /model/update HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 22:31:57] "GET /model/status HTTP/1.1" 200 -
+INFO:root:score=0.973, label=Good Aesthetic, latency=60.06ms, model_version=v2.0.0
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 22:31:57] "POST /predict HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: models\model_dynamic_quant_v1.0.0.tflite (v1.0.0)
+INFO:root:Successfully updated model dynamically to version v1.0.0
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2026 22:31:57] "POST /model/update HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: models\model_dynamic_quant_v1.0.0.tflite (v1.0.0)
+INFO:root:Initializing TFLite Interpreter for model: models\model_dynamic_quant_v1.0.0.tflite (v1.0.0)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:Initializing TFLite Interpreter for model: models\model_dynamic_quant_v1.0.0.tflite (v1.0.0)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:Initializing TFLite Interpreter for model: models\model_dynamic_quant_v1.0.0.tflite (v1.0.0)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:30:18] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:30:18] "GET /mridul_avatar.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:30:18] "GET /mridul.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:30:19] "GET /model/status HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:30:19] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:root:score=0.000, label=Bad Aesthetic, latency=44.42ms, model_version=v1.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:30:36] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:30:46] "POST /enhance HTTP/1.1" 200 -
+INFO:root:score=0.000, label=Bad Aesthetic, latency=36.89ms, model_version=v1.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:30:59] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:31:02] "POST /enhance HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
+INFO:root:Successfully updated model dynamically to version v2.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:31:09] "POST /model/update HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v1.0.0.tflite (v1.0.0)
+INFO:root:Successfully updated model dynamically to version v1.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:31:25] "POST /model/update HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v1.0.0.tflite (v1.0.0)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v1.0.0.tflite (v1.0.0)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.20.10.2:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:38:45] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:38:45] "GET /mridul.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:38:45] "GET /mridul_avatar.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:38:46] "GET /model/status HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:38:46] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:root:score=0.926, label=Good Aesthetic, latency=42.65ms, model_version=v1.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:39:02] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:39:08] "POST /enhance HTTP/1.1" 200 -
+INFO:root:score=0.000, label=Bad Aesthetic, latency=36.99ms, model_version=v1.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:39:22] "POST /predict HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:39:29] "POST /enhance HTTP/1.1" 200 -
+INFO:root:Initializing TFLite Interpreter for model: .\models\model_dynamic_quant_v2.0.0.tflite (v2.0.0)
+INFO:root:Successfully updated model dynamically to version v2.0.0
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2026 13:39:35] "POST /model/update HTTP/1.1" 200 -
