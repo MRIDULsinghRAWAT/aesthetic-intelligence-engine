@@ -1,20 +1,20 @@
 {
-  "active_version": "v2.0.0",
-  "active_model_path": ".\\models\\model_dynamic_quant_v2.0.0.tflite",
+  "active_version": "v1.0.0",
+  "active_model_path": "C:\\Users\\Mridul\\Desktop\\aesthetic-intelligence-engine\\models\\model_dynamic_quant_v1.0.0.tflite",
   "available_versions": {
     "v1.0.0": {
-      "path": ".\\models\\model_dynamic_quant_v1.0.0.tflite",
+      "path": "C:\\Users\\Mridul\\Desktop\\aesthetic-intelligence-engine\\models\\model_dynamic_quant_v1.0.0.tflite",
       "accuracy": 0.85,
       "quantization": "dynamic_range",
       "size_bytes": 2667336,
-      "timestamp": "2026-07-24T08:54:52Z"
+      "timestamp": "2026-07-27T12:04:21Z"
     },
     "v2.0.0": {
-      "path": ".\\models\\model_dynamic_quant_v2.0.0.tflite",
+      "path": "C:\\Users\\Mridul\\Desktop\\aesthetic-intelligence-engine\\models\\model_dynamic_quant_v2.0.0.tflite",
       "accuracy": 0.86,
       "quantization": "dynamic_range",
       "size_bytes": 2667336,
-      "timestamp": "2026-07-24T09:07:51Z"
+      "timestamp": "2026-07-27T12:04:12Z"
     }
   }
 }
